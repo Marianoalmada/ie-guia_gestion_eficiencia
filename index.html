@@ -257,6 +257,17 @@
                 }
             },
             opportunities: {
+                procesosProductivos: {
+                    title: "Procesos Productivos",
+                    icon: "fas fa-industry",
+                    description: "Los procesos centrales de transformación suelen ser los mayores consumidores. Las oportunidades aquí son de alto impacto.",
+                    specifics: [
+                        { title: "Recuperación de Calor Residual", what: "Capturar el calor de corrientes de salida (gases de escape, efluentes) y reutilizarlo para precalentamiento o generación.", how: "Instalar intercambiadores de calor, sistemas ORC (Organic Rankine Cycle). Requiere análisis de flujos térmicos.", benefit: "Reducción del consumo de combustible primario (5-30%+)." },
+                        { title: "Optimización de Molienda/Mezclado", what: "Ajustar tiempos de ciclo, usar motores de alta eficiencia (IE3/IE4) y Variadores de Velocidad (VSDs).", how: "Realizar análisis de proceso, medir carga de motores, planificar reemplazo e instalar VSDs.", benefit: "Reducción del consumo eléctrico (5-15%), menor desgaste mecánico." },
+                        { title: "Optimización de Separación/Destilación", what: "Optimizar parámetros operativos (presión, temperatura) o adoptar tecnologías más eficientes (membranas, MVR/TVR).", how: "Utilizar simulación de procesos, realizar balances de masa y energía, y estudios de viabilidad.", benefit: "Potencial de ahorro muy elevado (20-60%+) con cambio tecnológico." },
+                        { title: "Modernización en Conformado/Moldeo", what: "Reemplazar sistemas hidráulicos por servo-hidráulicos o eléctricos, y usar motores IE3/IE4 con VSDs.", how: "Realizar evaluación tecnológica, analizar ciclo de trabajo e implementar accionamientos eficientes.", benefit: "Reducción de consumo eléctrico (10-40%), mayor precisión y velocidad." }
+                    ]
+                },
                 aireComprimido: {
                     title: "Aire Comprimido",
                     icon: "fas fa-compress",
@@ -295,6 +306,33 @@
                         { title: "Correcto Dimensionamiento", what: "Asegurar que los motores estén dimensionados lo más ajustado posible a la carga real.", how: "Medir el consumo real de potencia y el factor de carga. Si un motor opera consistentemente < 60% de su carga, evaluar su reemplazo por uno más pequeño y eficiente.", benefit: "Operación en un rango de mayor eficiencia y mejor factor de potencia." },
                     ]
                 },
+                 refrigeracion: {
+                    title: "Refrigeración Industrial",
+                    icon: "fas fa-snowflake",
+                    description: "Sistemas críticos en muchas industrias. La optimización de temperaturas y un buen mantenimiento son clave para la eficiencia.",
+                     specifics: [
+                        { title: "Optimización de Temperaturas", what: "Operar con la temperatura de evaporación más alta posible y la de condensación más baja posible.", how: "Analizar necesidades reales, ajustar setpoints y asegurar limpieza de intercambiadores (evaporadores, condensadores).", benefit: "Mejora directa del COP (2-4% de ahorro por cada °C de mejora)." },
+                        { title: "Mantenimiento Enfocado a Eficiencia", what: "Asegurar limpieza de intercambiadores, nivel de refrigerante correcto, purga de incondensables y compresores en estado óptimo.", how: "Incluir limpieza, inspección de niveles, uso de purgadores automáticos y análisis de vibraciones/aceite en el plan de mantenimiento.", benefit: "Mantener eficiencia de diseño, evitar paradas, prolongar vida útil." },
+                    ]
+                },
+                instalacionesElectricas: {
+                    title: "Instalaciones Eléctricas",
+                    icon: "fas fa-bolt",
+                    description: "La red de distribución interna de la planta. Minimizar pérdidas y optimizar la calidad de energía es crucial.",
+                     specifics: [
+                        { title: "Corrección del Factor de Potencia (cos φ)", what: "Mantener un factor de potencia > 0.95 para minimizar pérdidas y evitar penalizaciones en la factura.", how: "Instalar bancos de capacitores automáticos centralizados o distribuidos. Realizar estudio de cargas reactivas.", benefit: "Eliminación de multas, reducción de pérdidas I²R, liberación de capacidad en transformadores." },
+                        { title: "Gestión de Calidad de Energía", what: "Medir y mitigar problemas como armónicos (THD), desbalances de tensión y fluctuaciones.", how: "Utilizar analizadores de energía fijos o portátiles. Implementar filtros de armónicos si es necesario.", benefit: "Reducción de pérdidas por calentamiento, prevención de fallos en equipos electrónicos, mayor vida útil de la instalación." },
+                        { title: "Optimización de Transformadores", what: "Utilizar transformadores de alta eficiencia y operarlos cerca de su punto de máxima eficiencia (50-75% de carga).", how: "Especificar transformadores por costo total de propiedad. Analizar perfiles de carga y considerar desconexión en vacío.", benefit: "Reducción directa de las pérdidas de energía 24/7 en los transformadores." }
+                    ]
+                },
+                vacio: {
+                    title: "Sistemas de Vacío",
+                    icon: "fas fa-circle-notch",
+                    description: "Similar al aire comprimido, los sistemas de vacío a menudo tienen un gran potencial de ahorro mediante la eliminación de fugas y la optimización.",
+                     specifics: [
+                        { title: "Detección de Fugas y Optimización", what: "Implementar un programa de detección/reparación de fugas, operar al mínimo nivel de vacío requerido y usar la tecnología de bomba más eficiente.", how: "Utilizar detectores ultrasónicos, instalar vacuómetros, analizar requerimientos del proceso y evaluar control por VSD.", benefit: "Ahorro energético en la generación de vacío, mejor y más estable rendimiento del proceso." }
+                    ]
+                },
                  iluminacion: {
                     title: "Iluminación",
                     icon: "fas fa-lightbulb",
@@ -302,6 +340,15 @@
                      specifics: [
                         { title: "Migración a Tecnología LED", what: "Reemplazar sistemáticamente todas las luminarias obsoletas (fluorescentes, halogenuros, etc.) por tecnología LED de alta eficiencia.", how: "Realizar un censo de luminarias. Seleccionar LEDs adecuados que cumplan los niveles de iluminación requeridos.", benefit: "Ahorro drástico (50-80%). Vida útil muy superior, reduciendo el mantenimiento. Retorno muy rápido (< 2 años)." },
                         { title: "Sistemas de Control Inteligente", what: "Complementar el LED con control para usar la luz solo cuando y donde se necesita.", how: "Instalar sensores de presencia/ocupación. Utilizar fotocélulas para regular la intensidad según la luz natural disponible.", benefit: "Ahorros adicionales del 10-40% sobre el consumo ya reducido por LED." },
+                    ]
+                },
+                 envolvente: {
+                    title: "Envolvente Edilicia",
+                    icon: "fas fa-building",
+                    description: "La piel del edificio. Un buen aislamiento y sellado son fundamentales para reducir las cargas de climatización.",
+                     specifics: [
+                        { title: "Mejora del Aislamiento Térmico", what: "Añadir o mejorar el aislamiento en techos, muros y suelos de áreas climatizadas.", how: "Realizar auditoría con termografía para identificar puentes térmicos. Instalar materiales aislantes adecuados.", benefit: "Reducción significativa de cargas térmicas (5-20%+), mejora del confort, prevención de condensaciones." },
+                        { title: "Reducción de Infiltraciones de Aire", what: "Sellar todas las rendijas y aberturas no intencionadas en la envolvente del edificio.", how: "Inspeccionar y sellar juntas y grietas. Instalar puertas rápidas, cortinas de aire o esclusas en accesos de alto tráfico.", benefit: "Reducción adicional de las cargas de climatización, mejor control de las condiciones ambientales interiores." }
                     ]
                 },
                  hvac: {
@@ -314,9 +361,9 @@
                 },
             },
             chartData: {
-                labels: ['Aire Comprimido', 'Vapor', 'Iluminación', 'Motores', 'Bombeo', 'HVAC'],
-                potential: [5, 4, 5, 3, 4, 3], // Scale 1-5
-                investment: [5, 3, 4, 3, 3, 4]  // Scale 1-5 where 5 is LOW investment (good)
+                labels: ['Procesos Prod.', 'Aire Comp.', 'Vapor', 'Bombeo', 'Motores', 'Refrigeración', 'Inst. Eléctricas', 'Vacío', 'Iluminación', 'Envolvente', 'HVAC'],
+                potential: [5, 5, 4, 4, 3, 4, 4, 3, 5, 3, 3], // Scale 1-5
+                investment: [2, 5, 3, 3, 3, 3, 4, 3, 4, 2, 4]  // Scale 1-5 where 5 is LOW investment (good)
             },
             strategyTabs: {
                 economia: `
@@ -325,30 +372,41 @@
                         <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
                             <h4 class="font-bold text-xl mb-2">Bajo Costo / Sin Costo (Retorno &lt; 1 año)</h4>
                             <ul class="list-disc ml-5 space-y-1 text-gray-700">
-                                <li>Reparación de fugas (aire, vapor)</li>
-                                <li>Ajuste de setpoints</li>
-                                <li>Optimización de horarios</li>
-                                <li>Campañas de concienciación</li>
+                                <li>Reparación de fugas (aire, vapor, vacío)</li>
+                                <li>Mantenimiento de purgadores de vapor</li>
+                                <li>Ajuste de setpoints y optimización de presión</li>
+                                <li>Maximizar retorno de condensado</li>
+                                <li>Reducción de infiltraciones de aire</li>
+                                <li>Mantenimiento enfocado a eficiencia (filtros, limpieza)</li>
+                                <li>Optimización de horarios y procedimientos</li>
+                                <li>Campañas de concienciación y formación</li>
                             </ul>
                         </div>
                         <div class="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-500">
                             <h4 class="font-bold text-xl mb-2">Mediana Inversión (Retorno 1-3 años)</h4>
                             <ul class="list-disc ml-5 space-y-1 text-gray-700">
+                                <li>Actualización masiva a Iluminación LED</li>
+                                <li>Instalación de bancos de capacitores</li>
                                 <li>Reemplazo de motores por IE3/IE4</li>
-                                <li>Instalación selectiva de VSDs</li>
-                                <li>Mejora de aislamiento térmico</li>
-                                <li>Actualización masiva a LED</li>
-                                <li>Corrección del factor de potencia</li>
+                                <li>Instalación selectiva de Variadores de Velocidad (VSDs)</li>
+                                <li>Mejora de aislamiento térmico (tuberías y equipos)</li>
+                                <li>Sistemas de control de iluminación inteligente</li>
+                                <li>Optimización de generación de aire comprimido (VSD/Sequencers)</li>
+                                <li>Modernización de accionamientos en procesos</li>
+                                <li>Implementación de sistemas básicos de monitorización</li>
                             </ul>
                         </div>
                         <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-500">
                             <h4 class="font-bold text-xl mb-2">Alta Inversión (Retorno &gt; 3 años)</h4>
                              <ul class="list-disc ml-5 space-y-1 text-gray-700">
-                                <li>Cambios tecnológicos mayores</li>
-                                <li>Sistemas de recuperación de calor</li>
-                                <li>Implementación de cogeneración</li>
-                                <li>Renovación completa de sistemas centrales</li>
-                                <li>Implementación completa de ISO 50001</li>
+                                <li>Cambios tecnológicos mayores en procesos</li>
+                                <li>Sistemas de recuperación de calor a gran escala (ORC)</li>
+                                <li>Implementación de cogeneración (CHP)</li>
+                                <li>Renovación completa de sistemas centrales (calderas, chillers)</li>
+                                <li>Mejoras sustanciales en la envolvente de edificios</li>
+                                <li>Optimización y reemplazo de transformadores</li>
+                                <li>Instalación de filtros de armónicos activos</li>
+                                <li>Implementación completa de ISO 50001 y monitorización avanzada</li>
                             </ul>
                         </div>
                     </div>
@@ -416,12 +474,18 @@
             const opportunityGrid = document.getElementById('opportunity-grid');
             const opportunityDetails = document.getElementById('opportunity-details');
             
-            Object.keys(data.opportunities).forEach(key => {
+            const opportunityOrder = [
+                'procesosProductivos', 'aireComprimido', 'vapor', 'bombeo', 
+                'motores', 'refrigeracion', 'instalacionesElectricas', 'vacio', 
+                'iluminacion', 'envolvente', 'hvac'
+            ];
+            
+            opportunityOrder.forEach(key => {
                 const opp = data.opportunities[key];
                 const card = document.createElement('div');
-                card.className = 'opportunity-card bg-white p-4 rounded-lg shadow-md cursor-pointer text-center';
+                card.className = 'opportunity-card bg-white p-4 rounded-lg shadow-md cursor-pointer text-center flex flex-col justify-center items-center';
                 card.dataset.key = key;
-                card.innerHTML = `<i class="${opp.icon} text-4xl text-blue-800 mb-3"></i><h4 class="font-semibold">${opp.title}</h4>`;
+                card.innerHTML = `<i class="${opp.icon} text-4xl text-blue-800 mb-3"></i><h4 class="font-semibold h-12 flex items-center">${opp.title}</h4>`;
                 opportunityGrid.appendChild(card);
             });
 
@@ -483,7 +547,7 @@
                             suggestedMax: 5,
                              pointLabels: {
                                 font: {
-                                    size: 12
+                                    size: 11
                                 }
                             }
                         }
