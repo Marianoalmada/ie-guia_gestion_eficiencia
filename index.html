@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF--8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guía Interactiva de Gestión de Eficiencia Energética</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -29,10 +29,16 @@
         .nav-link {
             transition: all 0.3s;
             border-bottom: 2px solid transparent;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
         }
-        .nav-link:hover, .nav-link.active {
+        .nav-link.active {
             color: #f97316;
             border-bottom-color: #f97316;
+        }
+         .nav-link:not(.active):hover {
+            color: #ffffff;
+            border-bottom-color: #fbbf24;
         }
         .opportunity-card {
             transition: all 0.3s ease;
@@ -51,6 +57,9 @@
             color: #1e3a8a;
             font-weight: 600;
         }
+        .delete-btn {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -64,142 +73,259 @@
                     <p class="text-sm text-gray-300">Por Ing. Mariano Almada B.</p>
                 </div>
             </div>
-            <nav class="hidden md:flex items-center space-x-6 text-lg">
-                <a href="#inicio" class="nav-link py-2">Inicio</a>
-                <a href="#metodologia" class="nav-link py-2">Metodología</a>
-                <a href="#oportunidades" class="nav-link py-2">Oportunidades</a>
-                <a href="#estrategia" class="nav-link py-2">Estrategia</a>
-            </nav>
-            <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
-                <i class="fas fa-bars"></i>
-            </button>
+            <div class="flex items-center">
+                <nav id="main-nav" class="hidden md:flex items-center space-x-6 text-lg mr-6">
+                    <a href="#" class="nav-link active" data-tab="guia">Guía de Oportunidades</a>
+                    <a href="#" class="nav-link" data-tab="calculadora">Calculadora de Ahorros</a>
+                    <a href="#" class="nav-link" data-tab="estrategia">Estrategia y Gestión</a>
+                </nav>
+                <img src="https://lh3.googleusercontent.com/ogw/AF2bZyiKoo3uuZdvMkgU5yKhhP9TPdKYQcuTJwXc10f1XdbbkrhI=s64-c-mo" alt="Imagen de perfil" class="hidden md:block h-12 w-12 rounded-full object-cover">
+                <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
         <div id="mobile-menu" class="hidden md:hidden bg-blue-900">
-            <a href="#inicio" class="block text-white text-center py-2">Inicio</a>
-            <a href="#metodologia" class="block text-white text-center py-2">Metodología</a>
-            <a href="#oportunidades" class="block text-white text-center py-2">Oportunidades</a>
-            <a href="#estrategia" class="block text-white text-center py-2">Estrategia</a>
+             <a href="#" class="block text-white text-center py-2 nav-link" data-tab="guia">Guía de Oportunidades</a>
+             <a href="#" class="block text-white text-center py-2 nav-link" data-tab="calculadora">Calculadora de Ahorros</a>
+             <a href="#" class="block text-white text-center py-2 nav-link" data-tab="estrategia">Estrategia y Gestión</a>
         </div>
     </header>
 
     <main>
-        <section id="inicio" class="pt-16 pb-12 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center max-w-4xl mx-auto">
-                    <h2 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">Transforme su Gestión Energética en una Ventaja Competitiva</h2>
-                    <p class="text-lg text-gray-600 mb-6">La gestión eficiente de la energía ya no es una opción, sino una necesidad estratégica. Este guía interactiva proporciona un marco práctico y accionable para identificar, implementar y sostener oportunidades de ahorro energético en su industria.</p>
+        <div id="guiaTab" class="tab-panel">
+            <section id="inicio" class="pt-16 pb-12 bg-white">
+                <div class="container mx-auto px-6">
+                    <div class="text-center max-w-4xl mx-auto">
+                        <h2 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">Transforme su Gestión Energética en una Ventaja Competitiva</h2>
+                        <p class="text-lg text-gray-600 mb-6">La gestión eficiente de la energía ya no es una opción, sino una necesidad estratégica. Este guía interactiva proporciona un marco práctico y accionable para identificar, implementar y sostener oportunidades de ahorro energético en su industria.</p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8 mt-12 max-w-6xl mx-auto">
+                        <div class="text-center p-6 bg-gray-50 rounded-lg shadow-sm">
+                            <i class="fas fa-dollar-sign text-4xl text-green-600 mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-2 text-blue-900">Reducción de Costos</h3>
+                            <p>Disminuya costos operativos y mejore su rentabilidad a través de un consumo energético optimizado.</p>
+                        </div>
+                        <div class="text-center p-6 bg-gray-50 rounded-lg shadow-sm">
+                            <i class="fas fa-leaf text-4xl text-teal-600 mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-2 text-blue-900">Sostenibilidad y Cumplimiento</h3>
+                            <p>Reduzca su huella de carbono, cumpla con las normativas y mejore la imagen corporativa de su empresa.</p>
+                        </div>
+                        <div class="text-center p-6 bg-gray-50 rounded-lg shadow-sm">
+                            <i class="fas fa-chart-line text-4xl text-orange-600 mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-2 text-blue-900">Mejora Continua</h3>
+                            <p>Implemente sistemas de gestión como ISO 50001 para asegurar ahorros sostenibles y fomentar una cultura de eficiencia.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="grid md:grid-cols-3 gap-8 mt-12 max-w-6xl mx-auto">
-                    <div class="text-center p-6 bg-gray-50 rounded-lg shadow-sm">
-                        <i class="fas fa-dollar-sign text-4xl text-green-600 mb-4"></i>
-                        <h3 class="text-xl font-semibold mb-2 text-blue-900">Reducción de Costos</h3>
-                        <p>Disminuya costos operativos y mejore su rentabilidad a través de un consumo energético optimizado.</p>
+            </section>
+    
+            <section id="metodologia" class="py-20">
+                <div class="container mx-auto px-6">
+                    <div class="text-center max-w-3xl mx-auto">
+                        <h2 class="text-4xl font-bold text-blue-900 mb-4">Marco de Referencia: Ciclo ISO 50001</h2>
+                        <p class="text-lg text-gray-600 mb-12">Adoptamos el ciclo de mejora continua (PDCA) de la norma ISO 50001 como la columna vertebral de una gestión energética robusta. Haga clic en cada fase para explorar los detalles.</p>
                     </div>
-                    <div class="text-center p-6 bg-gray-50 rounded-lg shadow-sm">
-                        <i class="fas fa-leaf text-4xl text-teal-600 mb-4"></i>
-                        <h3 class="text-xl font-semibold mb-2 text-blue-900">Sostenibilidad y Cumplimiento</h3>
-                        <p>Reduzca su huella de carbono, cumpla con las normativas y mejore la imagen corporativa de su empresa.</p>
-                    </div>
-                    <div class="text-center p-6 bg-gray-50 rounded-lg shadow-sm">
-                        <i class="fas fa-chart-line text-4xl text-orange-600 mb-4"></i>
-                        <h3 class="text-xl font-semibold mb-2 text-blue-900">Mejora Continua</h3>
-                        <p>Implemente sistemas de gestión como ISO 50001 para asegurar ahorros sostenibles y fomentar una cultura de eficiencia.</p>
+                    <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+                        <div id="pdca-diagram" class="grid grid-cols-2 gap-4 w-full max-w-md">
+                            <div class="pdca-step bg-blue-100 p-6 rounded-lg text-center cursor-pointer" data-step="plan">
+                                <i class="fas fa-clipboard-list text-4xl text-blue-800 mb-2"></i>
+                                <h3 class="text-2xl font-bold">Planificar</h3>
+                            </div>
+                            <div class="pdca-step bg-green-100 p-6 rounded-lg text-center cursor-pointer" data-step="do">
+                                <i class="fas fa-cogs text-4xl text-green-800 mb-2"></i>
+                                <h3 class="text-2xl font-bold">Hacer</h3>
+                            </div>
+                            <div class="pdca-step bg-orange-100 p-6 rounded-lg text-center cursor-pointer" data-step="act">
+                                <i class="fas fa-bullseye text-4xl text-orange-800 mb-2"></i>
+                                <h3 class="text-2xl font-bold">Actuar</h3>
+                            </div>
+                            <div class="pdca-step bg-purple-100 p-6 rounded-lg text-center cursor-pointer" data-step="check">
+                                <i class="fas fa-tasks text-4xl text-purple-800 mb-2"></i>
+                                <h3 class="text-2xl font-bold">Verificar</h3>
+                            </div>
+                        </div>
+                        <div id="pdca-content" class="w-full md:w-1/2 mt-8 md:mt-0 bg-white p-8 rounded-lg shadow-md">
+                            <h3 id="pdca-title" class="text-2xl font-bold text-blue-900 mb-4">Seleccione una fase</h3>
+                            <div id="pdca-text" class="text-gray-700"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+    
+            <section id="oportunidades" class="py-20 bg-white">
+                <div class="container mx-auto px-6">
+                    <div class="text-center max-w-3xl mx-auto">
+                        <h2 class="text-4xl font-bold text-blue-900 mb-4">Áreas de Oportunidad</h2>
+                        <p class="text-lg text-gray-600 mb-12">Explore las oportunidades de ahorro en los sistemas clave de su planta. Seleccione un área para ver las acciones específicas y priorice sus esfuerzos con el gráfico de impacto vs. inversión.</p>
+                    </div>
+    
+                    <div class="flex flex-col lg:flex-row gap-12">
+                        <div class="w-full lg:w-3/5">
+                            <h3 class="text-2xl font-semibold mb-6 text-center">Seleccione un Sistema para Analizar</h3>
+                            <div id="opportunity-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-2/5">
+                            <h3 class="text-2xl font-semibold mb-6 text-center">
+                                Priorización de Oportunidades
+                            </h3>
+                             <div class="chart-container">
+                                <canvas id="opportunityChart"></canvas>
+                            </div>
+                            <div id="chart-info-popup" class="bg-white p-4 rounded-lg shadow-xl border mt-4">
+                                <h4 class="font-bold text-lg mb-2">Escala de Referencia</h4>
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div>
+                                        <p class="font-semibold text-blue-800">Potencial de Ahorro</p>
+                                        <ul class="list-disc ml-4">
+                                            <li><span class="font-bold">5:</span> Muy Alto (>20%)</li>
+                                            <li><span class="font-bold">4:</span> Alto (10-20%)</li>
+                                            <li><span class="font-bold">3:</span> Medio (5-10%)</li>
+                                            <li><span class="font-bold">2:</span> Bajo (&lt;5%)</li>
+                                            <li><span class="font-bold">1:</span> Muy Bajo</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-orange-600">Bajo Nivel de Inversión</p>
+                                        <ul class="list-disc ml-4">
+                                            <li><span class="font-bold">5:</span> Muy Bajo (&lt;1 año)</li>
+                                            <li><span class="font-bold">4:</span> Bajo (1-2 años)</li>
+                                            <li><span class="font-bold">3:</span> Medio (2-3 años)</li>
+                                            <li><span class="font-bold">2:</span> Alto (3-5 años)</li>
+                                            <li><span class="font-bold">1:</span> Muy Alto (>5 años)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-2">Nota: El "Bajo Nivel de Inversión" se califica por la rapidez del retorno (Payback). Un puntaje más alto significa una inversión más atractiva y rápida de recuperar.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="opportunity-details" class="mt-16 bg-gray-50 p-8 rounded-lg shadow-inner min-h-[300px]">
+                         <p class="text-center text-gray-500">Seleccione un área para ver los detalles de las oportunidades de mejora.</p>
+                    </div>
+    
+                </div>
+            </section>
+        </div>
 
-        <section id="metodologia" class="py-20">
-            <div class="container mx-auto px-6">
-                <div class="text-center max-w-3xl mx-auto">
-                    <h2 class="text-4xl font-bold text-blue-900 mb-4">Marco de Referencia: Ciclo ISO 50001</h2>
-                    <p class="text-lg text-gray-600 mb-12">Adoptamos el ciclo de mejora continua (PDCA) de la norma ISO 50001 como la columna vertebral de una gestión energética robusta. Haga clic en cada fase para explorar los detalles.</p>
-                </div>
-                <div class="flex flex-col md:flex-row items-center justify-center gap-8">
-                    <div id="pdca-diagram" class="grid grid-cols-2 gap-4 w-full max-w-md">
-                        <div class="pdca-step bg-blue-100 p-6 rounded-lg text-center cursor-pointer" data-step="plan">
-                            <i class="fas fa-clipboard-list text-4xl text-blue-800 mb-2"></i>
-                            <h3 class="text-2xl font-bold">Planificar</h3>
-                        </div>
-                        <div class="pdca-step bg-green-100 p-6 rounded-lg text-center cursor-pointer" data-step="do">
-                            <i class="fas fa-cogs text-4xl text-green-800 mb-2"></i>
-                            <h3 class="text-2xl font-bold">Hacer</h3>
-                        </div>
-                        <div class="pdca-step bg-orange-100 p-6 rounded-lg text-center cursor-pointer" data-step="act">
-                            <i class="fas fa-bullseye text-4xl text-orange-800 mb-2"></i>
-                            <h3 class="text-2xl font-bold">Actuar</h3>
-                        </div>
-                        <div class="pdca-step bg-purple-100 p-6 rounded-lg text-center cursor-pointer" data-step="check">
-                            <i class="fas fa-tasks text-4xl text-purple-800 mb-2"></i>
-                            <h3 class="text-2xl font-bold">Verificar</h3>
-                        </div>
+        <div id="calculadoraTab" class="tab-panel hidden">
+            <section id="calculadora" class="py-20">
+                <div class="container mx-auto px-6">
+                     <div class="text-center max-w-3xl mx-auto">
+                        <h2 class="text-4xl font-bold text-blue-900 mb-4">Calculadora de Ahorros Potenciales</h2>
+                        <p class="text-lg text-gray-600 mb-12">Cuantifique el impacto económico de las oportunidades de mejora. Configure sus costos energéticos, agregue las oportunidades detectadas y genere un reporte de ahorros.</p>
                     </div>
-                    <div id="pdca-content" class="w-full md:w-1/2 mt-8 md:mt-0 bg-white p-8 rounded-lg shadow-md">
-                        <h3 id="pdca-title" class="text-2xl font-bold text-blue-900 mb-4">Seleccione una fase</h3>
-                        <div id="pdca-text" class="text-gray-700"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="oportunidades" class="py-20 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center max-w-3xl mx-auto">
-                    <h2 class="text-4xl font-bold text-blue-900 mb-4">Áreas de Oportunidad</h2>
-                    <p class="text-lg text-gray-600 mb-12">Explore las oportunidades de ahorro en los sistemas clave de su planta. Seleccione un área para ver las acciones específicas y priorice sus esfuerzos con el gráfico de impacto vs. inversión.</p>
-                </div>
-
-                <div class="flex flex-col lg:flex-row gap-12">
-                    <div class="w-full lg:w-3/5">
-                        <h3 class="text-2xl font-semibold mb-6 text-center">Seleccione un Sistema para Analizar</h3>
-                        <div id="opportunity-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    
+                    <div class="bg-white p-8 rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold text-blue-900 mb-6 border-b pb-4">1. Configuración de Costos (Setup)</h3>
+                        <div class="grid md:grid-cols-2 gap-6 mb-8">
+                            <div>
+                                <label for="costo-kwh" class="block text-gray-700 font-semibold mb-2">Costo Electricidad (U$S/kWh)</label>
+                                <input type="number" id="costo-kwh" class="w-full p-2 border border-gray-300 rounded" placeholder="Ej: 0.15">
+                            </div>
+                            <div>
+                                <label for="costo-gas" class="block text-gray-700 font-semibold mb-2">Costo Gas (U$S/m³)</label>
+                                <input type="number" id="costo-gas" class="w-full p-2 border border-gray-300 rounded" placeholder="Ej: 0.40">
+                            </div>
                         </div>
-                    </div>
-                    <div class="w-full lg:w-2/5">
-                        <h3 class="text-2xl font-semibold mb-6 text-center">Priorización de Oportunidades</h3>
-                         <div class="chart-container">
-                            <canvas id="opportunityChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-                
-                <div id="opportunity-details" class="mt-16 bg-gray-50 p-8 rounded-lg shadow-inner min-h-[300px]">
-                     <p class="text-center text-gray-500">Seleccione un área para ver los detalles de las oportunidades de mejora.</p>
-                </div>
-
-            </div>
-        </section>
-
-        <section id="estrategia" class="py-20">
-            <div class="container mx-auto px-6">
-                 <div class="text-center max-w-3xl mx-auto">
-                    <h2 class="text-4xl font-bold text-blue-900 mb-4">Gestión y Estrategia a Largo Plazo</h2>
-                    <p class="text-lg text-gray-600 mb-12">La tecnología es importante, pero el éxito a largo plazo depende de un marco de gestión sólido, un mantenimiento proactivo y una cultura de eficiencia.</p>
-                </div>
-                
-                <div class="bg-white rounded-lg shadow-lg p-8">
-                    <div class="border-b border-gray-200 mb-6">
-                        <nav class="-mb-px flex space-x-8" aria-label="Tabs">
-                            <button class="tab active whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg" data-tab="economia">
-                                Consideraciones Económicas
+    
+                        <h3 class="text-2xl font-bold text-blue-900 mb-6 border-b pb-4">2. Agregar Oportunidad de Mejora</h3>
+                        <form id="calculator-form" class="grid md:grid-cols-2 gap-6 items-start">
+                            <div class="grid grid-cols-1 gap-6">
+                                <div>
+                                    <label for="calc-sistema" class="block text-gray-700 font-semibold mb-2">Sistema a Analizar</label>
+                                    <select id="calc-sistema" class="w-full p-2 border border-gray-300 rounded bg-white"></select>
+                                </div>
+                                 <div>
+                                    <label for="calc-oportunidad" class="block text-gray-700 font-semibold mb-2">Oportunidad Encontrada</label>
+                                    <select id="calc-oportunidad" class="w-full p-2 border border-gray-300 rounded bg-white"></select>
+                                </div>
+                                <div>
+                                    <label for="calc-ubicacion" class="block text-gray-700 font-semibold mb-2">Ubicación / Equipo</label>
+                                    <input type="text" id="calc-ubicacion" class="w-full p-2 border border-gray-300 rounded" placeholder="Ej: Línea de envasado 2">
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 p-6 rounded-lg">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-4">Datos para el Cálculo</h4>
+                                <div id="dynamic-inputs" class="space-y-4">
+                                    <p class="text-gray-500">Seleccione un sistema y oportunidad...</p>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="text-right mt-6">
+                            <button id="add-opportunity-btn" class="bg-blue-800 text-white font-bold py-2 px-6 rounded hover:bg-blue-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                                <i class="fas fa-plus mr-2"></i>Agregar a la Lista
                             </button>
-                            <button class="tab whitespace-nowrap py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium text-lg" data-tab="mantenimiento">
-                                Mantenimiento y Confiabilidad
-                            </button>
-                             <button class="tab whitespace-nowrap py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium text-lg" data-tab="gestion">
-                                Gestión y Contratos
-                            </button>
-                             <button class="tab whitespace-nowrap py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium text-lg" data-tab="formacion">
-                                Formación y Cultura
-                            </button>
-                        </nav>
+                        </div>
                     </div>
+    
+                    <div class="bg-white p-8 rounded-lg shadow-lg mt-12">
+                        <h3 class="text-2xl font-bold text-blue-900 mb-6 border-b pb-4">3. Resumen de Ahorros Potenciales</h3>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full bg-white">
+                                <thead class="bg-gray-100">
+                                    <tr>
+                                        <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Sistema</th>
+                                        <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Oportunidad</th>
+                                        <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Ubicación</th>
+                                        <th class="text-right py-3 px-4 uppercase font-semibold text-sm">Ahorro Anual (U$S)</th>
+                                        <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="results-table-body">
+                                    <tr>
+                                        <td colspan="5" class="text-center py-6 text-gray-500">Aún no se han agregado oportunidades.</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="font-bold bg-gray-200">
+                                    <tr>
+                                        <td colspan="3" class="text-right py-3 px-4 text-lg">Total Ahorro Potencial:</td>
+                                        <td id="total-savings" class="text-right py-3 px-4 text-lg text-green-600">U$S 0.00</td>
+                                        <td class="py-3 px-4"></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+    
+                </div>
+            </section>
+        </div>
 
-                    <div id="tab-content">
+        <div id="estrategiaTab" class="tab-panel hidden">
+            <section id="estrategia" class="py-20 bg-gray-50">
+                <div class="container mx-auto px-6">
+                     <div class="text-center max-w-3xl mx-auto">
+                        <h2 class="text-4xl font-bold text-blue-900 mb-4">Gestión y Estrategia a Largo Plazo</h2>
+                        <p class="text-lg text-gray-600 mb-12">La tecnología es importante, pero el éxito a largo plazo depende de un marco de gestión sólido, un mantenimiento proactivo y una cultura de eficiencia.</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <div class="border-b border-gray-200 mb-6">
+                            <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                                <button class="sub-tab active whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg" data-subtab="economia">
+                                    Consideraciones Económicas
+                                </button>
+                                <button class="sub-tab whitespace-nowrap py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium text-lg" data-subtab="mantenimiento">
+                                    Mantenimiento y Confiabilidad
+                                </button>
+                                 <button class="sub-tab whitespace-nowrap py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium text-lg" data-subtab="gestion">
+                                    Gestión y Contratos
+                                </button>
+                                 <button class="sub-tab whitespace-nowrap py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium text-lg" data-subtab="formacion">
+                                    Formación y Cultura
+                                </button>
+                            </nav>
+                        </div>
+    
+                        <div id="sub-tab-content">
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
 
         <section id="conclusion" class="py-20 bg-blue-900 text-white">
              <div class="container mx-auto px-6 text-center">
@@ -260,12 +386,36 @@
                 procesosProductivos: {
                     title: "Procesos Productivos",
                     icon: "fas fa-industry",
-                    description: "Los procesos centrales de transformación suelen ser los mayores consumidores. Las oportunidades aquí son de alto impacto.",
+                    description: "Los procesos centrales de transformación suelen ser los mayores consumidores. Las oportunidades aquí son de alto impacto y específicas para cada industria.",
                     specifics: [
                         { title: "Recuperación de Calor Residual", what: "Capturar el calor de corrientes de salida (gases de escape, efluentes) y reutilizarlo para precalentamiento o generación.", how: "Instalar intercambiadores de calor, sistemas ORC (Organic Rankine Cycle). Requiere análisis de flujos térmicos.", benefit: "Reducción del consumo de combustible primario (5-30%+)." },
+                        { 
+                            title: "Optimización de Sistemas de Aspiración/Ventilación",
+                            what: "Reemplazar el control por dampers por Variadores de Velocidad (VSDs) para ajustar el flujo de aire a la demanda real del proceso.",
+                            how: "Realizar un estudio de caudales requeridos. Dimensionar e instalar VSDs en los motores de los ventiladores, controlados por sensores de presión o demanda de las máquinas.",
+                            benefit: "Ahorros energéticos muy altos (20-60%) debido a la relación cúbica entre velocidad y potencia. Mejor control del proceso y menor ruido.",
+                             calculation: {
+                                type: 'electric',
+                                params: [
+                                    { id: 'potencia', label: 'Potencia del Ventilador (kW)', type: 'number', placeholder: '45' },
+                                    { id: 'horas', label: 'Horas de Operación (h/año)', type: 'number', placeholder: '6000' },
+                                    { id: 'ahorro_estimado', label: 'Ahorro Estimado con VSD (%)', type: 'number', placeholder: '35' }
+                                ],
+                                formula: (params, costKwh) => {
+                                    const P = parseFloat(params.potencia);
+                                    const h = parseFloat(params.horas);
+                                    const S = parseFloat(params.ahorro_estimado) / 100;
+                                    if(isNaN(P) || isNaN(h) || isNaN(S) || isNaN(costKwh)) return 0;
+                                    const energyConsumedKwh = P * h;
+                                    const energySavedKwh = energyConsumedKwh * S;
+                                    return energySavedKwh * costKwh;
+                                }
+                            }
+                        },
+                        { title: "Eficiencia en Inyección de Plástico/Caucho", what: "Reducir el consumo en calentamiento y accionamientos hidráulicos, que representan la mayor parte de la energía en máquinas inyectoras.", how: "Aislar térmicamente los cañones de inyección. Evaluar el retrofit o reemplazo de máquinas hidráulicas convencionales por servo-hidráulicas o totalmente eléctricas.", benefit: "Ahorro combinado en electricidad (15-50%). Ciclos más rápidos, mayor precisión y menor necesidad de refrigeración." },
+                        { title: "Optimización en Procesos Metalmecánicos", what: "Mejorar la eficiencia de equipos de soldadura, hornos de tratamiento térmico y el uso de aire comprimido en mecanizado.", how: "Migrar a fuentes de soldadura tipo inverter de alta eficiencia. Mejorar el aislamiento y control de hornos. Optimizar la presión y uso del aire comprimido para soplado y herramientas.", benefit: "Reducción del consumo eléctrico, menor consumo de gas en hornos, y ahorros indirectos por un sistema de aire comprimido más eficiente." },
                         { title: "Optimización de Molienda/Mezclado", what: "Ajustar tiempos de ciclo, usar motores de alta eficiencia (IE3/IE4) y Variadores de Velocidad (VSDs).", how: "Realizar análisis de proceso, medir carga de motores, planificar reemplazo e instalar VSDs.", benefit: "Reducción del consumo eléctrico (5-15%), menor desgaste mecánico." },
-                        { title: "Optimización de Separación/Destilación", what: "Optimizar parámetros operativos (presión, temperatura) o adoptar tecnologías más eficientes (membranas, MVR/TVR).", how: "Utilizar simulación de procesos, realizar balances de masa y energía, y estudios de viabilidad.", benefit: "Potencial de ahorro muy elevado (20-60%+) con cambio tecnológico." },
-                        { title: "Modernización en Conformado/Moldeo", what: "Reemplazar sistemas hidráulicos por servo-hidráulicos o eléctricos, y usar motores IE3/IE4 con VSDs.", how: "Realizar evaluación tecnológica, analizar ciclo de trabajo e implementar accionamientos eficientes.", benefit: "Reducción de consumo eléctrico (10-40%), mayor precisión y velocidad." }
+                        { title: "Optimización de Separación/Destilación", what: "Optimizar parámetros operativos (presión, temperatura) o adoptar tecnologías más eficientes (membranas, MVR/TVR).", how: "Utilizar simulación de procesos, realizar balances de masa y energía, y estudios de viabilidad.", benefit: "Potencial de ahorro muy elevado (20-60%+) con cambio tecnológico." }
                     ]
                 },
                 aireComprimido: {
@@ -273,9 +423,77 @@
                     icon: "fas fa-compress",
                     description: "Uno de los servicios más costosos. A menudo oculta grandes potenciales de ahorro con retornos de inversión muy atractivos.",
                     specifics: [
-                        { title: "Detección y Reparación de Fugas", what: "Establecer un programa continuo y proactivo de detección y reparación.", how: "Utilizar detectores ultrasónicos, realizar barridos periódicos y gestionar reparaciones vía CMMS (SAP PM).", benefit: "Ahorro directo del 10-30% del costo de generación. Medida de bajo costo y retorno muy rápido." },
-                        { title: "Optimización de la Presión", what: "Operar el sistema a la mínima presión necesaria.", how: "Realizar un mapeo de presiones requeridas y ajustar los presostatos o el control centralizado.", benefit: "Ahorro de ~1% por cada 0.1 bar de reducción. Menor pérdida por fugas." },
-                        { title: "Optimización de la Generación", what: "Utilizar compresores VSD para demandas fluctuantes y/o sistemas de control maestro ('sequencer').", how: "Analizar perfil de demanda, evaluar instalación de VSDs e implementar controladores de secuencia.", benefit: "Ahorros del 10-50% en la energía de generación. Presión de red más estable." },
+                        { 
+                            title: "Detección y Reparación de Fugas", 
+                            what: "Establecer un programa continuo y proactivo de detección y reparación.", 
+                            how: "Utilizar detectores ultrasónicos, realizar barridos periódicos y gestionar reparaciones vía CMMS (SAP PM).", 
+                            benefit: "Ahorro directo del 10-30% del costo de generación. Medida de bajo costo y retorno muy rápido.",
+                            calculation: {
+                                type: 'electric',
+                                params: [
+                                    { id: 'presion', label: 'Presión de Trabajo (bar)', type: 'number', placeholder: '7' },
+                                    { id: 'diametro', label: 'Diámetro del Orificio (mm)', type: 'number', placeholder: '3' },
+                                    { id: 'horas', label: 'Horas de Operación (h/año)', type: 'number', placeholder: '8760' }
+                                ],
+                                formula: (params, costKwh) => {
+                                    const pressure = parseFloat(params.presion);
+                                    const diameter = parseFloat(params.diametro);
+                                    const hours = parseFloat(params.horas);
+                                    if (isNaN(pressure) || isNaN(diameter) || isNaN(hours) || isNaN(costKwh)) return 0;
+                                    const flowLps = 0.125 * Math.pow(diameter, 2) * (pressure + 1.013);
+                                    const flowM3h = flowLps * 3.6;
+                                    const specificConsumption = 0.12;
+                                    const energyLossKwh = flowM3h * hours * specificConsumption;
+                                    return energyLossKwh * costKwh;
+                                }
+                            }
+                        },
+                        { 
+                            title: "Optimización de la Presión", 
+                            what: "Operar el sistema a la mínima presión necesaria.", 
+                            how: "Realizar un mapeo de presiones requeridas y ajustar los presostatos o el control centralizado.", 
+                            benefit: "Ahorro de ~1.5% por cada 0.1 bar de reducción. Menor pérdida por fugas.",
+                            calculation: {
+                                type: 'electric',
+                                params: [
+                                    { id: 'potencia_compresores', label: 'Potencia Total Compresores (kW)', type: 'number', placeholder: '100' },
+                                    { id: 'horas', label: 'Horas de Operación (h/año)', type: 'number', placeholder: '6000' },
+                                    { id: 'reduccion_bar', label: 'Reducción de Presión (bar)', type: 'number', placeholder: '0.5' }
+                                ],
+                                formula: (params, costKwh) => {
+                                    const P = parseFloat(params.potencia_compresores);
+                                    const h = parseFloat(params.horas);
+                                    const R = parseFloat(params.reduccion_bar);
+                                    if (isNaN(P) || isNaN(h) || isNaN(R) || isNaN(costKwh)) return 0;
+                                    const savingFactor = R * 0.015 * 10;
+                                    const energySavedKwh = P * h * savingFactor;
+                                    return energySavedKwh * costKwh;
+                                }
+                            }
+                        },
+                        { 
+                            title: "Optimización de la Generación", 
+                            what: "Utilizar compresores VSD para demandas fluctuantes y/o sistemas de control maestro ('sequencer').", 
+                            how: "Analizar perfil de demanda, evaluar instalación de VSDs e implementar controladores de secuencia.", 
+                            benefit: "Ahorros del 10-50% en la energía de generación. Presión de red más estable.",
+                             calculation: {
+                                type: 'electric',
+                                params: [
+                                    { id: 'potencia', label: 'Potencia del Compresor (kW)', type: 'number', placeholder: '75' },
+                                    { id: 'horas', label: 'Horas de Operación (h/año)', type: 'number', placeholder: '6000' },
+                                    { id: 'ahorro_estimado', label: 'Ahorro Estimado con VSD/Sequencer (%)', type: 'number', placeholder: '15' }
+                                ],
+                                formula: (params, costKwh) => {
+                                    const P = parseFloat(params.potencia);
+                                    const h = parseFloat(params.horas);
+                                    const S = parseFloat(params.ahorro_estimado) / 100;
+                                    if(isNaN(P) || isNaN(h) || isNaN(S) || isNaN(costKwh)) return 0;
+                                    const energyConsumedKwh = P * h;
+                                    const energySavedKwh = energyConsumedKwh * S;
+                                    return energySavedKwh * costKwh;
+                                }
+                            }
+                        },
                     ]
                 },
                 vapor: {
@@ -283,9 +501,92 @@
                     icon: "fas fa-steam",
                     description: "Sistema vital para procesos térmicos. La eficiencia en la generación, distribución y uso final es clave.",
                      specifics: [
-                        { title: "Mantenimiento de Purgadores", what: "Implementar un programa sistemático de inspección, prueba y mantenimiento de todos los purgadores.", how: "Realizar inspecciones regulares con ultrasonido y termografía. Reparar o reemplazar purgadores defectuosos inmediatamente.", benefit: "Ahorro de vapor del 5-20%. Mejora de la transferencia de calor. Bajo costo, retorno muy rápido." },
-                        { title: "Aislamiento Térmico Óptimo", what: "Asegurar que todas las superficies calientes (tuberías, válvulas, tanques) estén correctamente aisladas.", how: "Realizar auditoría térmica con termografía. Instalar materiales y espesores adecuados. Usar mantas removibles en válvulas.", benefit: "Reducción drástica de pérdidas de calor (hasta 90%). Ahorro de combustible. Mejora de seguridad." },
-                        { title: "Maximizar Retorno de Condensado", what: "Recuperar la mayor cantidad posible de condensado caliente y retornarlo a la caldera.", how: "Asegurar buen funcionamiento de purgadores, verificar líneas de retorno e instalar bombas de condensado eficientes.", benefit: "Ahorro sustancial de combustible, agua y productos químicos." },
+                        { 
+                            title: "Mantenimiento de Purgadores", 
+                            what: "Implementar un programa sistemático de inspección, prueba y mantenimiento de todos los purgadores.", 
+                            how: "Realizar inspecciones regulares con ultrasonido y termografía. Reparar o reemplazar purgadores defectuosos inmediatamente.", 
+                            benefit: "Ahorro de vapor del 5-20%. Mejora de la transferencia de calor. Bajo costo, retorno muy rápido.",
+                            calculation: {
+                                type: 'gas',
+                                params: [
+                                    { id: 'diametro', label: 'Diámetro Orificio (mm)', type: 'number', placeholder: '3' },
+                                    { id: 'presion', label: 'Presión de Vapor (bar)', type: 'number', placeholder: '7' },
+                                    { id: 'horas', label: 'Horas de Fuga (h/año)', type: 'number', placeholder: '8000' }
+                                ],
+                                formula: (params, costGas) => {
+                                    const D = parseFloat(params.diametro);
+                                    const P = parseFloat(params.presion);
+                                    const hours = parseFloat(params.horas);
+                                    if(isNaN(D) || isNaN(P) || isNaN(hours) || isNaN(costGas)) return 0;
+                                    const steamLossKgPerHour = 2.4 * Math.pow(D, 2) * P;
+                                    const steamLossKgPerYear = steamLossKgPerHour * hours;
+                                    const enthalpyMJPerKg = 2.56;
+                                    const boilerEfficiency = 0.8;
+                                    const gasEnergyMJPerM3 = 36;
+                                    const gasNeededM3 = (steamLossKgPerYear * enthalpyMJPerKg) / boilerEfficiency / gasEnergyMJPerM3;
+                                    return gasNeededM3 * costGas;
+                                }
+                            }
+                        },
+                        { 
+                            title: "Aislamiento Térmico Óptimo",
+                            what: "Asegurar que todas las superficies calientes (tuberías, válvulas, tanques) estén correctamente aisladas.", 
+                            how: "Realizar auditoría térmica con termografía. Instalar materiales y espesores adecuados. Usar mantas removibles en válvulas.", 
+                            benefit: "Reducción drástica de pérdidas de calor (hasta 90%). Ahorro de combustible. Mejora de seguridad.",
+                            calculation: {
+                                type: 'gas',
+                                params: [
+                                    { id: 'temperatura', label: 'Temperatura Superficie (°C)', type: 'number', placeholder: '150' },
+                                    { id: 'longitud', label: 'Longitud sin Aislar (m)', type: 'number', placeholder: '10' },
+                                    { id: 'diametro_tubo', label: 'Diámetro Tubería (pulgadas)', type: 'number', placeholder: '4' },
+                                    { id: 'horas', label: 'Horas de Operación (h/año)', type: 'number', placeholder: '8000' }
+                                ],
+                                formula: (params, costGas) => {
+                                    const temp = parseFloat(params.temperatura);
+                                    const length = parseFloat(params.longitud);
+                                    const diameterIn = parseFloat(params.diametro_tubo);
+                                    const hours = parseFloat(params.horas);
+                                    if (isNaN(temp) || isNaN(length) || isNaN(diameterIn) || isNaN(hours) || isNaN(costGas)) return 0;
+                                    
+                                    const heatLossPerMeter = (0.015 * Math.pow(temp, 1.5)) * (diameterIn + 2);
+                                    const totalHeatLossW = heatLossPerMeter * length;
+                                    const totalEnergyLossKwh = (totalHeatLossW / 1000) * hours;
+                                    const boilerEfficiency = 0.80;
+                                    const gasEnergyContentKwh = 10;
+                                    const gasNeededM3 = (totalEnergyLossKwh / boilerEfficiency) / gasEnergyContentKwh;
+                                    return gasNeededM3 * costGas;
+                                }
+                            }
+                        },
+                        { 
+                            title: "Maximizar Retorno de Condensado", 
+                            what: "Recuperar la mayor cantidad posible de condensado caliente y retornarlo a la caldera.", 
+                            how: "Asegurar buen funcionamiento de purgadores, verificar líneas de retorno e instalar bombas de condensado eficientes.", 
+                            benefit: "Ahorro sustancial de combustible, agua y productos químicos.",
+                            calculation: {
+                                type: 'gas',
+                                params: [
+                                    { id: 'caudal', label: 'Caudal Recuperado (kg/h)', type: 'number', placeholder: '1000' },
+                                    { id: 'horas', label: 'Horas de Operación (h/año)', type: 'number', placeholder: '8000' },
+                                    { id: 'temp_condensado', label: 'Temp. Condensado (°C)', type: 'number', placeholder: '90' },
+                                    { id: 'temp_aporte', label: 'Temp. Agua de Aporte (°C)', type: 'number', placeholder: '15' }
+                                ],
+                                formula: (params, costGas) => {
+                                    const Q = parseFloat(params.caudal);
+                                    const h = parseFloat(params.horas);
+                                    const T_cond = parseFloat(params.temp_condensado);
+                                    const T_agua = parseFloat(params.temp_aporte);
+                                    if(isNaN(Q) || isNaN(h) || isNaN(T_cond) || isNaN(T_agua) || isNaN(costGas)) return 0;
+                                    
+                                    const energySavedKJ = Q * h * 4.186 * (T_cond - T_agua);
+                                    const energySavedKwh = energySavedKJ / 3600;
+                                    const boilerEfficiency = 0.80;
+                                    const gasEnergyContentKwh = 10;
+                                    const gasSavedM3 = (energySavedKwh / boilerEfficiency) / gasEnergyContentKwh;
+                                    return gasSavedM3 * costGas;
+                                }
+                            }
+                        },
                     ]
                 },
                 bombeo: {
@@ -293,7 +594,29 @@
                     icon: "fas fa-water",
                     description: "Presentes en toda la industria, los sistemas de bombeo ofrecen grandes ahorros mediante control y selección adecuada.",
                      specifics: [
-                        { title: "Aplicación de Variadores de Velocidad (VSD)", what: "Instalar VSDs en bombas con caudal variable, eliminando el estrangulamiento con válvulas.", how: "Analizar perfiles de flujo y presión. Instalar VSDs controlados por señal de proceso (presión, flujo, nivel).", benefit: "Ahorros muy significativos a cargas parciales (potencia ~ velocidad³). Mejor control del proceso." },
+                        { 
+                            title: "Aplicación de Variadores de Velocidad (VSD)", 
+                            what: "Instalar VSDs en bombas con caudal variable, eliminando el estrangulamiento con válvulas.", 
+                            how: "Analizar perfiles de flujo y presión. Instalar VSDs controlados por señal de proceso (presión, flujo, nivel).", 
+                            benefit: "Ahorros muy significativos a cargas parciales (potencia ~ velocidad³). Mejor control del proceso.",
+                            calculation: {
+                                type: 'electric',
+                                params: [
+                                    { id: 'potencia', label: 'Potencia de la Bomba (kW)', type: 'number', placeholder: '22' },
+                                    { id: 'horas', label: 'Horas de Operación (h/año)', type: 'number', placeholder: '4000' },
+                                    { id: 'ahorro_estimado', label: 'Ahorro Estimado con VSD (%)', type: 'number', placeholder: '30' }
+                                ],
+                                formula: (params, costKwh) => {
+                                    const P = parseFloat(params.potencia);
+                                    const h = parseFloat(params.horas);
+                                    const S = parseFloat(params.ahorro_estimado) / 100;
+                                    if(isNaN(P) || isNaN(h) || isNaN(S) || isNaN(costKwh)) return 0;
+                                    const energyConsumedKwh = P * h;
+                                    const energySavedKwh = energyConsumedKwh * S;
+                                    return energySavedKwh * costKwh;
+                                }
+                            }
+                        },
                         { title: "Selección Eficiente y Mantenimiento", what: "Seleccionar bombas que operen cerca de su Mejor Punto de Eficiencia (BEP).", how: "Utilizar software de selección y análisis de curvas de sistema. Realizar Mantenimiento Basado en Condición (MBC) en impulsores, sellos y rodamientos.", benefit: "Menor consumo eléctrico, mayor fiabilidad y vida útil de la bomba." },
                     ]
                 },
@@ -302,8 +625,57 @@
                     icon: "fas fa-robot",
                     description: "La fuerza motriz de la industria. La eficiencia en motores representa un potencial de ahorro distribuido en toda la planta.",
                      specifics: [
-                        { title: "Estandarización en Motores de Alta Eficiencia (IE3/IE4)", what: "Adoptar como política el uso de motores de eficiencia Premium (IE3) o Super Premium (IE4) en todos los proyectos y reemplazos.", how: "Especificar motores IE3/IE4 en compras. Priorizar el reemplazo proactivo de motores antiguos (IE1/IE2) de gran potencia o muchas horas de operación.", benefit: "Ahorro del 2-8% por motor. Mayor fiabilidad y vida útil." },
-                        { title: "Correcto Dimensionamiento", what: "Asegurar que los motores estén dimensionados lo más ajustado posible a la carga real.", how: "Medir el consumo real de potencia y el factor de carga. Si un motor opera consistentemente < 60% de su carga, evaluar su reemplazo por uno más pequeño y eficiente.", benefit: "Operación en un rango de mayor eficiencia y mejor factor de potencia." },
+                        { 
+                            title: "Estandarización en Motores de Alta Eficiencia (IE3/IE4)", 
+                            what: "Adoptar como política el uso de motores de eficiencia Premium (IE3) o Super Premium (IE4) en todos los proyectos y reemplazos.", 
+                            how: "Especificar motores IE3/IE4 en compras. Priorizar el reemplazo proactivo de motores antiguos (IE1/IE2) de gran potencia o muchas horas de operación.", 
+                            benefit: "Ahorro del 2-8% por motor. Mayor fiabilidad y vida útil.",
+                            calculation: {
+                                type: 'electric',
+                                params: [
+                                    { id: 'potencia', label: 'Potencia del Motor (kW)', type: 'number', placeholder: '15' },
+                                    { id: 'horas', label: 'Horas de Operación (h/año)', type: 'number', placeholder: '6000' },
+                                    { id: 'eficiencia_actual', label: 'Eficiencia Actual (%)', type: 'number', placeholder: '88' },
+                                    { id: 'eficiencia_nueva', label: 'Eficiencia Nueva (%)', type: 'number', placeholder: '92' }
+                                ],
+                                formula: (params, costKwh) => {
+                                    const P = parseFloat(params.potencia);
+                                    const h = parseFloat(params.horas);
+                                    const n_old = parseFloat(params.eficiencia_actual) / 100;
+                                    const n_new = parseFloat(params.eficiencia_nueva) / 100;
+                                    if(isNaN(P) || isNaN(h) || isNaN(n_old) || isNaN(n_new) || isNaN(costKwh)) return 0;
+                                    const energySavedKwh = P * h * ((1 / n_old) - (1 / n_new));
+                                    return energySavedKwh * costKwh;
+                                }
+                            }
+                        },
+                        { 
+                            title: "Correcto Dimensionamiento", 
+                            what: "Asegurar que los motores estén dimensionados lo más ajustado posible a la carga real.", 
+                            how: "Medir el consumo real de potencia y el factor de carga. Si un motor opera consistentemente < 60% de su carga, evaluar su reemplazo por uno más pequeño y eficiente.", 
+                            benefit: "Operación en un rango de mayor eficiencia y mejor factor de potencia.",
+                             calculation: {
+                                type: 'electric',
+                                params: [
+                                    { id: 'potencia_actual', label: 'Potencia Motor Actual (kW)', type: 'number', placeholder: '30' },
+                                    { id: 'carga_media', label: 'Carga Media Real (kW)', type: 'number', placeholder: '12' },
+                                    { id: 'horas', label: 'Horas de Operación (h/año)', type: 'number', placeholder: '6000' },
+                                    { id: 'eficiencia_actual', label: 'Eficiencia Actual a Carga Media (%)', type: 'number', placeholder: '85' },
+                                    { id: 'eficiencia_nueva', label: 'Eficiencia Motor Nuevo a Carga Media (%)', type: 'number', placeholder: '91' }
+                                ],
+                                formula: (params, costKwh) => {
+                                    const P_load = parseFloat(params.carga_media);
+                                    const h = parseFloat(params.horas);
+                                    const n_old = parseFloat(params.eficiencia_actual) / 100;
+                                    const n_new = parseFloat(params.eficiencia_nueva) / 100;
+                                    if(isNaN(P_load) || isNaN(h) || isNaN(n_old) || isNaN(n_new) || isNaN(costKwh)) return 0;
+                                    const consumption_old = (P_load / n_old) * h;
+                                    const consumption_new = (P_load / n_new) * h;
+                                    const energySavedKwh = consumption_old - consumption_new;
+                                    return energySavedKwh * costKwh;
+                                }
+                            }
+                        },
                     ]
                 },
                  refrigeracion: {
@@ -311,18 +683,107 @@
                     icon: "fas fa-snowflake",
                     description: "Sistemas críticos en muchas industrias. La optimización de temperaturas y un buen mantenimiento son clave para la eficiencia.",
                      specifics: [
-                        { title: "Optimización de Temperaturas", what: "Operar con la temperatura de evaporación más alta posible y la de condensación más baja posible.", how: "Analizar necesidades reales, ajustar setpoints y asegurar limpieza de intercambiadores (evaporadores, condensadores).", benefit: "Mejora directa del COP (2-4% de ahorro por cada °C de mejora)." },
-                        { title: "Mantenimiento Enfocado a Eficiencia", what: "Asegurar limpieza de intercambiadores, nivel de refrigerante correcto, purga de incondensables y compresores en estado óptimo.", how: "Incluir limpieza, inspección de niveles, uso de purgadores automáticos y análisis de vibraciones/aceite en el plan de mantenimiento.", benefit: "Mantener eficiencia de diseño, evitar paradas, prolongar vida útil." },
+                        { 
+                            title: "Automatización y Control de Velocidad Variable", 
+                            what: "Implementar control dinámico en compresores y condensadores para ajustar su rendimiento a la demanda térmica real, en lugar de operar en ciclos de todo o nada.", 
+                            how: "Instalar VSDs en compresores y ventiladores de condensadores. Integrar sensores de presión/temperatura y usar un PLC o controlador dedicado para modular la velocidad según la carga y condiciones ambientales.", 
+                            benefit: "Ahorros energéticos muy significativos (15-40%). Control de temperatura más preciso y estable. Menor estrés mecánico en equipos y mayor vida útil.",
+                            calculation: {
+                                type: 'electric',
+                                params: [
+                                    { id: 'potencia', label: 'Potencia del Compresor (kW)', type: 'number', placeholder: '50' },
+                                    { id: 'horas', label: 'Horas de Operación (h/año)', type: 'number', placeholder: '5000' },
+                                    { id: 'ahorro_estimado', label: 'Ahorro Estimado (%)', type: 'number', placeholder: '25' }
+                                ],
+                                formula: (params, costKwh) => {
+                                    const P = parseFloat(params.potencia);
+                                    const h = parseFloat(params.horas);
+                                    const S = parseFloat(params.ahorro_estimado) / 100;
+                                    if(isNaN(P) || isNaN(h) || isNaN(S) || isNaN(costKwh)) return 0;
+                                    const energyConsumedKwh = P * h;
+                                    const energySavedKwh = energyConsumedKwh * S;
+                                    return energySavedKwh * costKwh;
+                                }
+                            }
+                        },
+                        { 
+                            title: "Optimización de Temperaturas de Operación", 
+                            what: "Operar con la temperatura de evaporación más alta posible y la de condensación más baja posible.", 
+                            how: "Analizar necesidades reales, ajustar setpoints y asegurar limpieza de intercambiadores (evaporadores, condensadores).", 
+                            benefit: "Mejora directa del COP (2-4% de ahorro por cada °C de mejora).",
+                            calculation: {
+                                type: 'electric',
+                                params: [
+                                    { id: 'consumo_anual', label: 'Consumo Anual del Sistema (kWh)', type: 'number', placeholder: '250000' },
+                                    { id: 'mejora_temp', label: 'Mejora de Temp. Evap/Condens (°C)', type: 'number', placeholder: '2' },
+                                    { id: 'ahorro_por_grado', label: 'Ahorro por Grado (%)', type: 'number', placeholder: '3' }
+                                ],
+                                formula: (params, costKwh) => {
+                                    const C = parseFloat(params.consumo_anual);
+                                    const T = parseFloat(params.mejora_temp);
+                                    const S = parseFloat(params.ahorro_por_grado) / 100;
+                                    if(isNaN(C) || isNaN(T) || isNaN(S) || isNaN(costKwh)) return 0;
+                                    const energySavedKwh = C * T * S;
+                                    return energySavedKwh * costKwh;
+                                }
+                            }
+                        },
+                        { title: "Mantenimiento Enfocado a Eficiencia", what: "Asegurar limpieza de intercambiadores, nivel de refrigerante correcto, purga de incondensables y compresores en estado óptimo.", how: "Incluir limpieza, inspección de niveles, uso de purgadores automáticos y análisis de vibraciones/aceite en el plan de mantenimiento.", benefit: "Mantener eficiencia de diseño, evitar paradas, prolongar vida útil." }
                     ]
                 },
-                instalacionesElectricas: {
-                    title: "Instalaciones Eléctricas",
+                sistemaElectrico: {
+                    title: "Sistema Eléctrico",
                     icon: "fas fa-bolt",
                     description: "La red de distribución interna de la planta. Minimizar pérdidas y optimizar la calidad de energía es crucial.",
                      specifics: [
-                        { title: "Corrección del Factor de Potencia (cos φ)", what: "Mantener un factor de potencia > 0.95 para minimizar pérdidas y evitar penalizaciones en la factura.", how: "Instalar bancos de capacitores automáticos centralizados o distribuidos. Realizar estudio de cargas reactivas.", benefit: "Eliminación de multas, reducción de pérdidas I²R, liberación de capacidad en transformadores." },
-                        { title: "Gestión de Calidad de Energía", what: "Medir y mitigar problemas como armónicos (THD), desbalances de tensión y fluctuaciones.", how: "Utilizar analizadores de energía fijos o portátiles. Implementar filtros de armónicos si es necesario.", benefit: "Reducción de pérdidas por calentamiento, prevención de fallos en equipos electrónicos, mayor vida útil de la instalación." },
-                        { title: "Optimización de Transformadores", what: "Utilizar transformadores de alta eficiencia y operarlos cerca de su punto de máxima eficiencia (50-75% de carga).", how: "Especificar transformadores por costo total de propiedad. Analizar perfiles de carga y considerar desconexión en vacío.", benefit: "Reducción directa de las pérdidas de energía 24/7 en los transformadores." }
+                        { 
+                            title: "Corrección del Factor de Potencia (cos φ)", 
+                            what: "Mantener un factor de potencia > 0.95 para minimizar pérdidas y evitar penalizaciones en la factura.", 
+                            how: "Instalar bancos de capacitores automáticos centralizados o distribuidos. Realizar estudio de cargas reactivas.", 
+                            benefit: "Eliminación de multas, reducción de pérdidas I²R, liberación de capacidad en transformadores.",
+                            calculation: {
+                                type: 'electric',
+                                params: [
+                                    { id: 'potencia', label: 'Potencia Activa Media (kW)', type: 'number', placeholder: '500' },
+                                    { id: 'horas', label: 'Horas de Operación (h/año)', type: 'number', placeholder: '6000' },
+                                    { id: 'fp_inicial', label: 'FP Actual (ej: 0.8)', type: 'number', placeholder: '0.8' },
+                                    { id: 'fp_objetivo', label: 'FP Objetivo (ej: 0.98)', type: 'number', placeholder: '0.98' }
+                                ],
+                                formula: (params, costKwh) => {
+                                    const P = parseFloat(params.potencia);
+                                    const h = parseFloat(params.horas);
+                                    const fp1 = parseFloat(params.fp_inicial);
+                                    const fp2 = parseFloat(params.fp_objetivo);
+                                    if(isNaN(P) || isNaN(h) || isNaN(fp1) || isNaN(fp2) || isNaN(costKwh)) return 0;
+                                    const totalKwh = P * h;
+                                    const systemLossPercentage = 0.03;
+                                    const lossReductionFactor = 1 - Math.pow(fp1 / fp2, 2);
+                                    const energySavedKwh = totalKwh * systemLossPercentage * lossReductionFactor;
+                                    return energySavedKwh * costKwh;
+                                }
+                            }
+                        },
+                        { title: "Gestión de Calidad de Energía", what: "Medir y mitigar problemas como armónicos (THDV, THDi), desbalances de tensión y fluctuaciones.", how: "Utilizar analizadores de energía fijos o portátiles. Implementar filtros de armónicos si es necesario.", benefit: "Reducción de pérdidas por calentamiento, prevención de fallos en equipos electrónicos, mayor vida útil de la instalación." },
+                        { 
+                            title: "Optimización de Transformadores", 
+                            what: "Utilizar transformadores de alta eficiencia y operarlos cerca de su punto de máxima eficiencia (50-75% de carga).", 
+                            how: "Especificar transformadores por costo total de propiedad. Analizar perfiles de carga y considerar desconexión en vacío.", 
+                            benefit: "Reducción directa de las pérdidas de energía 24/7 en los transformadores.",
+                            calculation: {
+                                type: 'electric',
+                                params: [
+                                    { id: 'perdidas_vacio', label: 'Pérdidas en Vacío (kW)', type: 'number', placeholder: '1.2' },
+                                    { id: 'horas_sin_carga', label: 'Horas/Año sin Carga Útil', type: 'number', placeholder: '2000' }
+                                ],
+                                formula: (params, costKwh) => {
+                                    const p_vacio = parseFloat(params.perdidas_vacio);
+                                    const h_vacio = parseFloat(params.horas_sin_carga);
+                                    if(isNaN(p_vacio) || isNaN(h_vacio) || isNaN(costKwh)) return 0;
+                                    return p_vacio * h_vacio * costKwh;
+                                }
+                            }
+                        },
+                        { title: "Optimización de Conductores y Reducción de Pérdidas", what: "Asegurar que los conductores eléctricos estén correctamente dimensionados y minimizar la longitud de los recorridos para reducir las pérdidas por efecto Joule (I²R).", how: "Realizar cálculos de caída de tensión. Ubicar subestaciones cerca de los grandes consumos. Evaluar el reemplazo de conductores subdimensionados.", benefit: "Reducción de pérdidas en distribución (1-3%), mejora de la calidad de tensión en puntos de uso, y mayor seguridad." }
                     ]
                 },
                 vacio: {
@@ -338,8 +799,53 @@
                     icon: "fas fa-lightbulb",
                     description: "Una de las oportunidades con más rápido retorno de la inversión, gracias a la tecnología LED y los sistemas de control.",
                      specifics: [
-                        { title: "Migración a Tecnología LED", what: "Reemplazar sistemáticamente todas las luminarias obsoletas (fluorescentes, halogenuros, etc.) por tecnología LED de alta eficiencia.", how: "Realizar un censo de luminarias. Seleccionar LEDs adecuados que cumplan los niveles de iluminación requeridos.", benefit: "Ahorro drástico (50-80%). Vida útil muy superior, reduciendo el mantenimiento. Retorno muy rápido (< 2 años)." },
-                        { title: "Sistemas de Control Inteligente", what: "Complementar el LED con control para usar la luz solo cuando y donde se necesita.", how: "Instalar sensores de presencia/ocupación. Utilizar fotocélulas para regular la intensidad según la luz natural disponible.", benefit: "Ahorros adicionales del 10-40% sobre el consumo ya reducido por LED." },
+                        { 
+                            title: "Migración a Tecnología LED", 
+                            what: "Reemplazar sistemáticamente todas las luminarias obsoletas (fluorescentes, halogenuros, etc.) por tecnología LED de alta eficiencia.", 
+                            how: "Realizar un censo de luminarias. Seleccionar LEDs adecuados que cumplan los niveles de iluminación requeridos.", 
+                            benefit: "Ahorro drástico (50-80%). Vida útil muy superior, reduciendo el mantenimiento. Retorno muy rápido (< 2 años).",
+                            calculation: {
+                                type: 'electric',
+                                params: [
+                                    { id: 'potencia_actual', label: 'Potencia Actual / Luminaria (W)', type: 'number', placeholder: '400' },
+                                    { id: 'potencia_nueva', label: 'Potencia Nueva / Luminaria (W)', type: 'number', placeholder: '150' },
+                                    { id: 'cantidad', label: 'N° de Luminarias', type: 'number', placeholder: '50' },
+                                    { id: 'horas', label: 'Horas de Operación (h/año)', type: 'number', placeholder: '4000' }
+                                ],
+                                formula: (params, costKwh) => {
+                                    const p_old = parseFloat(params.potencia_actual);
+                                    const p_new = parseFloat(params.potencia_nueva);
+                                    const qty = parseFloat(params.cantidad);
+                                    const h = parseFloat(params.horas);
+                                    if(isNaN(p_old) || isNaN(p_new) || isNaN(qty) || isNaN(h) || isNaN(costKwh)) return 0;
+                                    const powerSavedKw = ((p_old - p_new) * qty) / 1000;
+                                    const energySavedKwh = powerSavedKw * h;
+                                    return energySavedKwh * costKwh;
+                                }
+                            }
+                        },
+                        { 
+                            title: "Sistemas de Control Inteligente", 
+                            what: "Complementar el LED con control para usar la luz solo cuando y donde se necesita.", 
+                            how: "Instalar sensores de presencia/ocupación. Utilizar fotocélulas para regular la intensidad según la luz natural disponible.", 
+                            benefit: "Ahorros adicionales del 10-40% sobre el consumo ya reducido por LED.",
+                            calculation: {
+                                type: 'electric',
+                                params: [
+                                    { id: 'potencia_area', label: 'Potencia Total del Área (kW)', type: 'number', placeholder: '7.5' },
+                                    { id: 'horas_actuales', label: 'Horas de Operación Actuales (h/año)', type: 'number', placeholder: '4000' },
+                                    { id: 'reduccion_horas', label: 'Reducción de Horas Estimada (%)', type: 'number', placeholder: '30' }
+                                ],
+                                formula: (params, costKwh) => {
+                                    const P = parseFloat(params.potencia_area);
+                                    const h = parseFloat(params.horas_actuales);
+                                    const R = parseFloat(params.reduccion_horas) / 100;
+                                    if(isNaN(P) || isNaN(h) || isNaN(R) || isNaN(costKwh)) return 0;
+                                    const energySavedKwh = P * h * R;
+                                    return energySavedKwh * costKwh;
+                                }
+                            }
+                        },
                     ]
                 },
                  envolvente: {
@@ -356,14 +862,102 @@
                     icon: "fas fa-wind",
                     description: "Clave en edificios y áreas de proceso. La optimización de su operación y mantenimiento es fundamental.",
                      specifics: [
-                        { title: "Optimización de Operación y Mantenimiento", what: "Asegurar que los sistemas operen eficientemente y solo cuando sea necesario.", how: "Ajustar termostatos a niveles razonables (24°C verano, 21°C invierno), implementar programaciones horarias, limpiar filtros y serpentines, y utilizar 'free cooling' cuando sea posible.", benefit: "Ahorro energético, mejora de la calidad del aire interior y mayor confort." }
+                        { 
+                            title: "Optimización de Operación y Mantenimiento (Free Cooling)", 
+                            what: "Asegurar que los sistemas operen eficientemente, utilizando 'free cooling' cuando las condiciones exteriores lo permitan.", 
+                            how: "Ajustar termostatos, limpiar filtros/serpentines y programar el sistema de control para habilitar el modo economizador (free cooling).", 
+                            benefit: "Ahorro energético significativo al evitar el uso del compresor.",
+                            calculation: {
+                                type: 'electric',
+                                params: [
+                                    { id: 'potencia_compresor', label: 'Potencia del Compresor (kW)', type: 'number', placeholder: '100' },
+                                    { id: 'horas_free_cooling', label: 'Horas Anuales de Free Cooling Estimadas (h/año)', type: 'number', placeholder: '800' }
+                                ],
+                                formula: (params, costKwh) => {
+                                    const P = parseFloat(params.potencia_compresor);
+                                    const h = parseFloat(params.horas_free_cooling);
+                                    if(isNaN(P) || isNaN(h) || isNaN(costKwh)) return 0;
+                                    const energySavedKwh = P * h;
+                                    return energySavedKwh * costKwh;
+                                }
+                            }
+                        }
                     ]
                 },
+                gestionEstrategica: {
+                    title: "Gestión Estratégica",
+                    icon: "fas fa-file-signature",
+                    description: "Oportunidades que van más allá del hardware y se centran en cómo y cuándo se compra y consume la energía para reducir el costo final.",
+                    specifics: [
+                        { title: "Gestión Activa de Contratos de Energía", what: "Analizar y renegociar activamente los contratos de suministro de electricidad y gas para asegurar las tarifas más competitivas, ajustar la potencia contratada a la demanda real y eliminar penalidades.", how: "Realizar una auditoría de las facturas y contratos actuales. Comparar con ofertas del mercado y el perfil de consumo real de la planta. Negociar con proveedores o cambiar a uno más competitivo.", benefit: "Reducción directa de la factura energética (5-20%+) sin inversión en equipos. Mayor predictibilidad de costos." },
+                        { 
+                            title: "Gestión de la Demanda (Peak Shaving)", 
+                            what: "Reducir los picos de demanda de potencia que son fuertemente penalizados en la factura eléctrica.", 
+                            how: "Desplazar el funcionamiento de grandes consumos a horarios de menor demanda (valle), instalar sistemas de control que gestionen arranques secuenciales, o evaluar sistemas de almacenamiento de energía (baterías).", 
+                            benefit: "Reducción significativa del término de potencia en la factura, lo que puede representar un gran porcentaje del costo total.",
+                            calculation: {
+                                type: 'electric',
+                                params: [
+                                    { id: 'reduccion_pico', label: 'Reducción del Pico de Demanda (kW)', type: 'number', placeholder: '50' },
+                                    { id: 'costo_demanda', label: 'Costo Mensual por Demanda (U$S/kW-mes)', type: 'number', placeholder: '10' }
+                                ],
+                                formula: (params, costKwh) => {
+                                    const R = parseFloat(params.reduccion_pico);
+                                    const C = parseFloat(params.costo_demanda);
+                                    if(isNaN(R) || isNaN(C)) return 0;
+                                    const monthlySaving = R * C;
+                                    return monthlySaving * 12;
+                                }
+                            }
+                        }
+                    ]
+                },
+                generacionRecursos: {
+                    title: "Generación y Recursos",
+                    icon: "fas fa-solar-panel",
+                    description: "Optimización del uso de recursos y evaluación de la generación in-situ para reducir la dependencia y costos de la red.",
+                    specifics: [
+                        { title: "Generación Distribuida (Autoconsumo)", what: "Instalar sistemas de generación de energía en el sitio, como plantas solares fotovoltaicas o sistemas de cogeneración (CHP), para cubrir una parte de la demanda eléctrica y/o térmica.", how: "Realizar un estudio de viabilidad técnico-económico, analizando el recurso disponible (solar, gas), la curva de consumo de la planta y los marcos regulatorios para la inyección de excedentes.", benefit: "Reducción de la energía comprada a la red, costos energéticos más bajos a largo plazo, mayor seguridad de suministro y mejora de la sostenibilidad." },
+                        { title: "Gestión del Agua (Nexo Agua-Energía)", what: "Reducir el consumo de agua para disminuir indirectamente el consumo de energía asociado a su bombeo, tratamiento, calentamiento y enfriamiento.", how: "Implementar un programa de detección y reparación de fugas de agua, instalar dispositivos de bajo consumo, optimizar torres de enfriamiento y reutilizar efluentes tratados.", benefit: "Ahorro en la factura de agua y en la energía asociada (2-10% del consumo de bombeo/calentamiento)." }
+                    ]
+                },
+                tratamientoAguas: {
+                    title: "Tratamiento de Aguas y Efluentes",
+                    icon: "fas fa-recycle",
+                    description: "Área de alto consumo energético oculto. La optimización del bombeo, aireación y la recuperación de recursos ofrece grandes potenciales de ahorro.",
+                    specifics: [
+                        { title: "Optimización de Bombeo y Redes Hidráulicas", what: "Asegurar que las bombas operen en su punto de máxima eficiencia (BEP) y reducir las pérdidas de carga en la red de distribución de agua y efluentes.", how: "Analizar las curvas de las bombas vs. las del sistema. Utilizar VSDs para caudales variables. Realizar un dimensionamiento óptimo de tuberías y minimizar accesorios.", benefit: "Reducción del consumo eléctrico específico (kWh/m³) para el movimiento de fluidos." },
+                        { 
+                            title: "Mejora de Eficiencia en Aireación", 
+                            what: "Reducir el consumo energético de los sopladores en plantas de tratamiento biológico, que suelen ser los equipos de mayor consumo.", 
+                            how: "Reemplazar sopladores antiguos por tecnologías de alta eficiencia (ej. turbo sopladores). Implementar control avanzado basado en sensores de Oxígeno Disuelto (OD) para modular la velocidad de los sopladores vía VSDs.", 
+                            benefit: "Ahorro energético muy significativo (20-50%) en el sistema de tratamiento de efluentes.",
+                            calculation: {
+                                type: 'electric',
+                                params: [
+                                    { id: 'potencia', label: 'Potencia Total Sopladores (kW)', type: 'number', placeholder: '150' },
+                                    { id: 'horas', label: 'Horas de Operación (h/año)', type: 'number', placeholder: '8760' },
+                                    { id: 'ahorro_estimado', label: 'Ahorro Estimado por Control/Eficiencia (%)', type: 'number', placeholder: '25' }
+                                ],
+                                formula: (params, costKwh) => {
+                                    const P = parseFloat(params.potencia);
+                                    const h = parseFloat(params.horas);
+                                    const S = parseFloat(params.ahorro_estimado) / 100;
+                                    if(isNaN(P) || isNaN(h) || isNaN(S) || isNaN(costKwh)) return 0;
+                                    const energyConsumedKwh = P * h;
+                                    const energySavedKwh = energyConsumedKwh * S;
+                                    return energySavedKwh * costKwh;
+                                }
+                            }
+                        },
+                        { title: "Recuperación de Recursos (Agua y Energía)", what: "Reutilizar el agua tratada dentro de la planta para reducir la captación de agua nueva. Recuperar energía térmica de efluentes calientes.", how: "Implementar tratamientos terciarios para permitir la reutilización en servicios (ej. torres de enfriamiento, limpieza). Instalar intercambiadores de calor en las descargas de efluentes calientes para precalentar agua de proceso.", benefit: "Doble ahorro: reducción en la factura de agua y en la energía asociada al bombeo y calentamiento." }
+                    ]
+                }
             },
             chartData: {
-                labels: ['Procesos Prod.', 'Aire Comp.', 'Vapor', 'Bombeo', 'Motores', 'Refrigeración', 'Inst. Eléctricas', 'Vacío', 'Iluminación', 'Envolvente', 'HVAC'],
-                potential: [5, 5, 4, 4, 3, 4, 4, 3, 5, 3, 3], // Scale 1-5
-                investment: [2, 5, 3, 3, 3, 3, 4, 3, 4, 2, 4]  // Scale 1-5 where 5 is LOW investment (good)
+                labels: ['Procesos Prod.', 'Aire Comp.', 'Vapor', 'Bombeo', 'Motores', 'Refrigeración', 'Sistema Eléctrico', 'Vacío', 'Iluminación', 'Envolvente', 'HVAC', 'Gestión Estrat.', 'Gen. y Recursos', 'Trat. Aguas'],
+                potential: [5, 5, 4, 4, 3, 5, 4, 3, 5, 3, 3, 5, 4, 4],
+                investment: [2, 5, 3, 3, 3, 3, 4, 3, 4, 2, 4, 4, 1, 2]
             },
             strategyTabs: {
                 economia: `
@@ -372,7 +966,7 @@
                         <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
                             <h4 class="font-bold text-xl mb-2">Bajo Costo / Sin Costo (Retorno &lt; 1 año)</h4>
                             <ul class="list-disc ml-5 space-y-1 text-gray-700">
-                                <li>Reparación de fugas (aire, vapor, vacío)</li>
+                                <li>Reparación de fugas (aire, vapor, vacío, agua)</li>
                                 <li>Mantenimiento de purgadores de vapor</li>
                                 <li>Ajuste de setpoints y optimización de presión</li>
                                 <li>Maximizar retorno de condensado</li>
@@ -389,9 +983,11 @@
                                 <li>Instalación de bancos de capacitores</li>
                                 <li>Reemplazo de motores por IE3/IE4</li>
                                 <li>Instalación selectiva de Variadores de Velocidad (VSDs)</li>
+                                <li>Automatización y VSDs en sistemas de refrigeración</li>
                                 <li>Mejora de aislamiento térmico (tuberías y equipos)</li>
                                 <li>Sistemas de control de iluminación inteligente</li>
                                 <li>Optimización de generación de aire comprimido (VSD/Sequencers)</li>
+                                <li>Optimización de aireación en tratamiento de efluentes</li>
                                 <li>Modernización de accionamientos en procesos</li>
                                 <li>Implementación de sistemas básicos de monitorización</li>
                             </ul>
@@ -402,7 +998,8 @@
                                 <li>Cambios tecnológicos mayores en procesos</li>
                                 <li>Sistemas de recuperación de calor a gran escala (ORC)</li>
                                 <li>Implementación de cogeneración (CHP)</li>
-                                <li>Renovación completa de sistemas centrales (calderas, chillers)</li>
+                                <li>Instalación de plantas de Generación Distribuida (ej. Solar)</li>
+                                <li>Renovación completa de sistemas centrales (calderas, chillers, sopladores)</li>
                                 <li>Mejoras sustanciales en la envolvente de edificios</li>
                                 <li>Optimización y reemplazo de transformadores</li>
                                 <li>Instalación de filtros de armónicos activos</li>
@@ -416,7 +1013,7 @@
                     <p class="mb-4 text-gray-600">Un equipo que falla o funciona de forma degradada, consume más energía. Es fundamental integrar la eficiencia en las estrategias de mantenimiento.</p>
                      <ul class="list-disc ml-5 space-y-3 text-gray-700">
                         <li><strong class="text-gray-800">Mantenimiento Predictivo (PdM/MBC):</strong> Utilizar termografía, análisis de vibraciones y ultrasonido no solo para predecir fallos, sino para detectar ineficiencias energéticas como puntos calientes, fugas, desalineación y rodamientos defectuosos.</li>
-                        <li><strong class="text-gray-800">Mantenimiento Centrado en Confiabilidad (RCM):</strong> Al analizar modos de fallo, considerar explícitamente aquellos con impacto energético y definir tareas proactivas para prevenirlos.</li>
+                        <li><strong class="text-gray-800">Mantenimiento Centrado en Confiabilidad (RCM):</strong> Al analizar los modos de fallo, considerar explícitamente aquellos con impacto energético y definir tareas proactivas para prevenirlos.</li>
                         <li><strong class="text-gray-800">Integración con CMMS (SAP PM):</strong> Codificar tareas de eficiencia, registrar hallazgos (fugas reparadas) y analizar tendencias para justificar mejoras y evaluar la efectividad de las estrategias.</li>
                     </ul>`,
                 gestion: `
@@ -447,45 +1044,62 @@
         };
         
         document.addEventListener('DOMContentLoaded', () => {
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
+            // Main Tab Navigation
+            const mainNavLinks = document.querySelectorAll('#main-nav a.nav-link, #mobile-menu a.nav-link');
+            const tabPanels = document.querySelectorAll('.tab-panel');
+
+            function switchTab(tabId) {
+                tabPanels.forEach(panel => {
+                    panel.classList.toggle('hidden', panel.id !== `${tabId}Tab`);
+                });
+                mainNavLinks.forEach(link => {
+                    link.classList.toggle('active', link.dataset.tab === tabId);
+                });
+            }
+
+            mainNavLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const tabId = e.target.dataset.tab;
+                    switchTab(tabId);
+                    if(mobileMenu.classList.contains('hidden') === false) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    window.scrollTo(0,0);
+                });
             });
 
-            // PDCA Cycle Interaction
+
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+            // PDCA Cycle
             const pdcaSteps = document.querySelectorAll('.pdca-step');
             const pdcaTitle = document.getElementById('pdca-title');
             const pdcaText = document.getElementById('pdca-text');
-
             pdcaSteps.forEach(step => {
                 step.addEventListener('click', () => {
-                    const stepKey = step.dataset.step;
-                    const content = data.pdcaContent[stepKey];
+                    const content = data.pdcaContent[step.dataset.step];
                     pdcaTitle.textContent = content.title;
                     pdcaText.innerHTML = content.text;
                 });
             });
-            // Initial selection
-            pdcaSteps[0].click();
+            if(pdcaSteps.length) pdcaSteps[0].click();
 
             // Opportunities Grid and Chart
             const opportunityGrid = document.getElementById('opportunity-grid');
             const opportunityDetails = document.getElementById('opportunity-details');
-            
-            const opportunityOrder = [
-                'procesosProductivos', 'aireComprimido', 'vapor', 'bombeo', 
-                'motores', 'refrigeracion', 'instalacionesElectricas', 'vacio', 
-                'iluminacion', 'envolvente', 'hvac'
-            ];
+            const opportunityOrder = ['procesosProductivos', 'aireComprimido', 'vapor', 'bombeo', 'motores', 'refrigeracion', 'sistemaElectrico', 'vacio', 'iluminacion', 'envolvente', 'hvac', 'gestionEstrategica', 'generacionRecursos', 'tratamientoAguas'];
             
             opportunityOrder.forEach(key => {
                 const opp = data.opportunities[key];
+                if (!opp) return;
                 const card = document.createElement('div');
                 card.className = 'opportunity-card bg-white p-4 rounded-lg shadow-md cursor-pointer text-center flex flex-col justify-center items-center';
                 card.dataset.key = key;
-                card.innerHTML = `<i class="${opp.icon} text-4xl text-blue-800 mb-3"></i><h4 class="font-semibold h-12 flex items-center">${opp.title}</h4>`;
+                card.innerHTML = `<i class="${opp.icon} text-4xl text-blue-800 mb-3"></i><h4 class="font-semibold h-12 flex items-center text-sm md:text-base">${opp.title}</h4>`;
                 opportunityGrid.appendChild(card);
             });
 
@@ -499,9 +1113,7 @@
                 const key = card.dataset.key;
                 const content = data.opportunities[key];
                 
-                let detailsHtml = `<h3 class="text-3xl font-bold text-blue-900 mb-6">${content.title}</h3>`;
-                detailsHtml += `<p class="text-gray-600 mb-8">${content.description}</p>`;
-                
+                let detailsHtml = `<h3 class="text-3xl font-bold text-blue-900 mb-6">${content.title}</h3><p class="text-gray-600 mb-8">${content.description}</p>`;
                 content.specifics.forEach(spec => {
                     detailsHtml += `
                         <div class="bg-white p-6 rounded-lg shadow-sm mb-4">
@@ -511,87 +1123,179 @@
                                 <div><strong class="block text-blue-800">Cómo Hacerlo:</strong> ${spec.how}</div>
                                 <div><strong class="block text-blue-800">Beneficio Esperado:</strong> ${spec.benefit}</div>
                             </div>
-                        </div>
-                    `;
+                        </div>`;
                 });
                 opportunityDetails.innerHTML = detailsHtml;
                 opportunityDetails.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
-
+            
             const ctx = document.getElementById('opportunityChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: data.chartData.labels,
-                    datasets: [{
-                        label: 'Potencial de Ahorro',
-                        data: data.chartData.potential,
-                        backgroundColor: 'rgba(30, 58, 138, 0.2)',
-                        borderColor: 'rgba(30, 58, 138, 1)',
-                        borderWidth: 2
-                    }, {
-                        label: 'Bajo Nivel de Inversión',
-                        data: data.chartData.investment,
-                        backgroundColor: 'rgba(249, 115, 22, 0.2)',
-                        borderColor: 'rgba(249, 115, 22, 1)',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        r: {
-                            angleLines: { display: false },
-                            suggestedMin: 0,
-                            suggestedMax: 5,
-                             pointLabels: {
-                                font: {
-                                    size: 11
-                                }
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: { position: 'top' },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.dataset.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    label += context.raw;
-                                    return label + ' (de 5)';
-                                }
-                            }
-                        }
-                    }
-                }
-            });
+            new Chart(ctx, { type: 'radar', data: { labels: data.chartData.labels, datasets: [{ label: 'Potencial de Ahorro', data: data.chartData.potential, backgroundColor: 'rgba(30, 58, 138, 0.2)', borderColor: 'rgba(30, 58, 138, 1)', borderWidth: 2 }, { label: 'Bajo Nivel de Inversión', data: data.chartData.investment, backgroundColor: 'rgba(249, 115, 22, 0.2)', borderColor: 'rgba(249, 115, 22, 1)', borderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, scales: { r: { angleLines: { display: true }, suggestedMin: 0, suggestedMax: 5, pointLabels: { font: { size: 11 } } } }, plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: function(context) { return `${context.dataset.label || ''}: ${context.raw} (de 5)`; } } } } } });
 
-            // Strategy Tabs
-            const tabs = document.querySelectorAll('.tab');
-            const tabContent = document.getElementById('tab-content');
+            // Strategy Sub-Tabs
+            const subTabsContainer = document.getElementById('estrategia');
+            
+            function initializeStrategyTabs() {
+                const subTabs = subTabsContainer.querySelectorAll('.sub-tab');
+                const subTabContent = subTabsContainer.querySelector('#sub-tab-content');
+                
+                const updateSubTabContent = (subTabKey) => {
+                    if(!subTabContent) return;
+                    subTabContent.innerHTML = data.strategyTabs[subTabKey];
+                    subTabs.forEach(t => t.classList.toggle('active', t.dataset.subtab === subTabKey));
+                };
 
-            function updateTabContent(tabKey) {
-                tabContent.innerHTML = data.strategyTabs[tabKey];
-                 tabs.forEach(t => {
-                    if (t.dataset.tab === tabKey) {
-                        t.classList.add('active');
-                    } else {
-                        t.classList.remove('active');
+                subTabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        updateSubTabContent(tab.dataset.subtab);
+                    });
+                });
+                if(subTabs.length) updateSubTabContent('economia');
+            }
+            
+            // Calculator
+            function initializeCalculator() {
+                const calculatorSection = document.getElementById('calculadora');
+                if(!calculatorSection) return;
+
+                const calculatorForm = calculatorSection.querySelector('#calculator-form');
+                const costoKwhInput = calculatorSection.querySelector('#costo-kwh');
+                const costoGasInput = calculatorSection.querySelector('#costo-gas');
+                const calcSistemaSelect = calculatorSection.querySelector('#calc-sistema');
+                const calcOportunidadSelect = calculatorSection.querySelector('#calc-oportunidad');
+                const dynamicInputsDiv = calculatorSection.querySelector('#dynamic-inputs');
+                const addOpportunityBtn = calculatorSection.querySelector('#add-opportunity-btn');
+                const resultsTableBody = calculatorSection.querySelector('#results-table-body');
+                const totalSavingsEl = calculatorSection.querySelector('#total-savings');
+                let savedOpportunities = [];
+
+                costoKwhInput.value = localStorage.getItem('costoKwh') || '';
+                costoGasInput.value = localStorage.getItem('costoGas') || '';
+                costoKwhInput.addEventListener('input', (e) => localStorage.setItem('costoKwh', e.target.value));
+                costoGasInput.addEventListener('input', (e) => localStorage.setItem('costoGas', e.target.value));
+
+                calcSistemaSelect.innerHTML = '<option value="">Seleccione un sistema...</option>' + Object.keys(data.opportunities).map(key => `<option value="${key}">${data.opportunities[key].title}</option>`).join('');
+
+                calcSistemaSelect.addEventListener('change', () => {
+                    const systemKey = calcSistemaSelect.value;
+                    calcOportunidadSelect.innerHTML = '<option value="">Seleccione una oportunidad...</option>';
+                    dynamicInputsDiv.innerHTML = '<p class="text-gray-500">Seleccione una oportunidad...</p>';
+                    addOpportunityBtn.disabled = true;
+                    if (systemKey && data.opportunities[systemKey]) {
+                        const opportunities = data.opportunities[systemKey].specifics
+                            .map((spec, index) => `<option value="${index}">${spec.title}</option>`).join('');
+                        calcOportunidadSelect.innerHTML += opportunities;
                     }
                 });
+
+                calcOportunidadSelect.addEventListener('change', () => {
+                    const systemKey = calcSistemaSelect.value;
+                    const opportunityIndex = calcOportunidadSelect.value;
+                    dynamicInputsDiv.innerHTML = '';
+                    addOpportunityBtn.disabled = true;
+                    
+                    if (systemKey && opportunityIndex !== '') {
+                        const spec = data.opportunities[systemKey].specifics[opportunityIndex];
+                        if (spec && spec.calculation) {
+                            spec.calculation.params.forEach(param => {
+                                const inputGroup = document.createElement('div');
+                                inputGroup.innerHTML = `
+                                    <label for="param-${param.id}" class="block text-sm font-medium text-gray-700">${param.label}</label>
+                                    <input type="${param.type}" id="param-${param.id}" placeholder="${param.placeholder}" class="mt-1 w-full p-2 border border-gray-300 rounded">
+                                `;
+                                dynamicInputsDiv.appendChild(inputGroup);
+                            });
+                        } else {
+                            dynamicInputsDiv.innerHTML = '<p class="text-gray-500 p-4 bg-yellow-100 border-l-4 border-yellow-500 rounded">Oportunidad cualitativa. Agregue para registrar el hallazgo.</p>';
+                        }
+                        addOpportunityBtn.disabled = false;
+                    } else {
+                         dynamicInputsDiv.innerHTML = '<p class="text-gray-500">Seleccione una oportunidad...</p>';
+                    }
+                });
+
+                addOpportunityBtn.addEventListener('click', () => {
+                    if(addOpportunityBtn.disabled) return;
+                    const systemKey = calcSistemaSelect.value;
+                    const opportunityIndex = calcOportunidadSelect.value;
+                    const ubicacion = calculatorSection.querySelector('#calc-ubicacion').value;
+                    if (!systemKey || opportunityIndex === '' || !ubicacion) {
+                        alert('Por favor, complete todos los campos.');
+                        return;
+                    }
+                    const spec = data.opportunities[systemKey].specifics[opportunityIndex];
+                    let savings = 0;
+                    if(spec.calculation) {
+                        const costKwh = parseFloat(costoKwhInput.value);
+                        const costGas = parseFloat(costoGasInput.value);
+                        const cost = spec.calculation.type === 'electric' ? costKwh : costGas;
+                        if (isNaN(cost) || cost <= 0) {
+                             alert(`Por favor, ingrese un costo válido para ${spec.calculation.type === 'electric' ? 'la electricidad' : 'el gas'}.`);
+                            return;
+                        }
+                        const params = {};
+                        let allParamsValid = true;
+                        spec.calculation.params.forEach(p => {
+                            const input = dynamicInputsDiv.querySelector(`#param-${p.id}`);
+                            if (!input || !input.value) allParamsValid = false;
+                            else params[p.id] = input.value;
+                        });
+                        if (!allParamsValid) {
+                            alert('Por favor, complete todos los datos para el cálculo.');
+                            return;
+                        }
+                        savings = spec.calculation.formula(params, cost);
+                    }
+                    
+                    savedOpportunities.push({
+                        id: Date.now(),
+                        system: data.opportunities[systemKey].title,
+                        opportunity: spec.title,
+                        location: ubicacion,
+                        savings: savings
+                    });
+                    renderTable();
+                    calculatorForm.reset();
+                    calcSistemaSelect.dispatchEvent(new Event('change'));
+                });
+                
+                function renderTable() {
+                    if (savedOpportunities.length === 0) {
+                        resultsTableBody.innerHTML = '<tr><td colspan="5" class="text-center py-6 text-gray-500">Aún no se han agregado oportunidades.</td></tr>';
+                    } else {
+                        resultsTableBody.innerHTML = savedOpportunities.map(opp => `
+                            <tr class="border-b">
+                                <td class="py-3 px-4">${opp.system}</td>
+                                <td class="py-3 px-4">${opp.opportunity}</td>
+                                <td class="py-3 px-4">${opp.location}</td>
+                                <td class="py-3 px-4 text-right font-medium">${opp.savings > 0 ? `U$S ${opp.savings.toFixed(2)}` : 'N/A'}</td>
+                                <td class="py-3 px-4 text-center">
+                                    <i class="fas fa-trash text-red-500 delete-btn" data-id="${opp.id}"></i>
+                                </td>
+                            </tr>
+                        `).join('');
+                    }
+                    updateTotal();
+                }
+
+                function updateTotal() {
+                    const total = savedOpportunities.reduce((sum, opp) => sum + opp.savings, 0);
+                    totalSavingsEl.textContent = `U$S ${total.toFixed(2)}`;
+                }
+                
+                resultsTableBody.addEventListener('click', e => {
+                    if (e.target.classList.contains('delete-btn')) {
+                        const id = parseInt(e.target.dataset.id);
+                        savedOpportunities = savedOpportunities.filter(opp => opp.id !== id);
+                        renderTable();
+                    }
+                });
+                calcSistemaSelect.dispatchEvent(new Event('change'));
             }
 
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    updateTabContent(tab.dataset.tab);
-                });
-            });
-            updateTabContent('economia');
-
+            // Initialize all components
+            initializeCalculator();
+            initializeStrategyTabs();
         });
     </script>
     
