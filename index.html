@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Interactiva de Gestión de Eficiencia Energética</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Corporate Blue & Warm Neutrals -->
+    <!-- Application Structure Plan: La aplicación se ha reestructurado desde un acordeón lineal a una SPA con navegación superior fija ("Inicio", "Metodología", "Oportunidades", "Estrategia") para un acceso directo y no lineal a la información. La sección "Oportunidades" es ahora un panel de control interactivo donde el usuario selecciona un sistema (ej. "Aire Comprimido") y ve dinámicamente sus detalles, evitando la sobrecarga de información. La sección "Estrategia" agrupa conceptos de gestión (Mantenimiento, Formación, Economía) en pestañas interactivas. Esta arquitectura orientada a tareas se eligió para transformar una guía de lectura en una herramienta de consulta y decisión rápida, mejorando drásticamente la usabilidad y la capacidad del usuario para sintetizar la información. -->
+    <!-- Visualization & Content Choices: 1. Metodología ISO 50001 -> Organizar -> Diagrama PDCA interactivo (HTML/CSS/JS) -> Click revela detalles de cada fase -> Facilita la comprensión del ciclo de mejora continua. 2. Oportunidades de Ahorro -> Comparar -> Gráfico de Radar (Chart.js) para visualizar Potencial vs. Inversión -> Permite una priorización visual e instantánea de las áreas de acción. 3. Detalles de Oportunidades -> Informar -> Contenido dinámico inyectado por JS -> Mantiene la UI limpia y enfocada en la selección del usuario. 4. Niveles de Inversión -> Organizar/Filtrar -> Pestañas interactivas (HTML/JS) -> Permite al usuario filtrar las oportunidades por presupuesto, haciéndolo más accionable. Se conservó todo el contenido textual, reubicándolo en estas estructuras interactivas. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7f6;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: auto;
+            height: 400px;
+        }
+        .nav-link {
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #f97316;
+            border-bottom-color: #f97316;
+        }
+        .opportunity-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .opportunity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .opportunity-card.active {
+            border-color: #1e3a8a;
+            background-color: #e0e7ff;
+        }
+        .tab.active {
+            border-bottom-color: #1e3a8a;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-blue-900 text-white p-4 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://www.inteligenciaenergetica.com.ar/inteligencia_energetica/img/LOGOIEWEB_blanco.png" alt="Logo Inteligencia Energética" class="h-10 mr-4">
+                <div>
+                    <h1 class="text-xl font-bold">Guía de Gestión Energética</h1>
+                    <p class="text-sm text-gray-300">Por Ing. Mariano Almada B.</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center space-x-6 text-lg">
+                <a href="#inicio" class="nav-link py-2">Inicio</a>
+                <a href="#metodologia" class="nav-link py-2">Metodología</a>
+                <a href="#oportunidades" class="nav-link py-2">Oportunidades</a>
+                <a href="#estrategia" class="nav-link py-2">Estrategia</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-blue-900">
+            <a href="#inicio" class="block text-white text-center py-2">Inicio</a>
+            <a href="#metodologia" class="block text-white text-center py-2">Metodología</a>
+            <a href="#oportunidades" class="block text-white text-center py-2">Oportunidades</a>
+            <a href="#estrategia" class="block text-white text-center py-2">Estrategia</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="inicio" class="pt-16 pb-12 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-4xl mx-auto">
+                    <h2 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">Transforme su Gestión Energética en una Ventaja Competitiva</h2>
+                    <p class="text-lg text-gray-600 mb-6">La gestión eficiente de la energía ya no es una opción, sino una necesidad estratégica. Este guía interactiva proporciona un marco práctico y accionable para identificar, implementar y sostener oportunidades de ahorro energético en su industria.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8 mt-12 max-w-6xl mx-auto">
+                    <div class="text-center p-6 bg-gray-50 rounded-lg shadow-sm">
+                        <i class="fas fa-dollar-sign text-4xl text-green-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2 text-blue-900">Reducción de Costos</h3>
+                        <p>Disminuya costos operativos y mejore su rentabilidad a través de un consumo energético optimizado.</p>
+                    </div>
+                    <div class="text-center p-6 bg-gray-50 rounded-lg shadow-sm">
+                        <i class="fas fa-leaf text-4xl text-teal-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2 text-blue-900">Sostenibilidad y Cumplimiento</h3>
+                        <p>Reduzca su huella de carbono, cumpla con las normativas y mejore la imagen corporativa de su empresa.</p>
+                    </div>
+                    <div class="text-center p-6 bg-gray-50 rounded-lg shadow-sm">
+                        <i class="fas fa-chart-line text-4xl text-orange-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2 text-blue-900">Mejora Continua</h3>
+                        <p>Implemente sistemas de gestión como ISO 50001 para asegurar ahorros sostenibles y fomentar una cultura de eficiencia.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="metodologia" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto">
+                    <h2 class="text-4xl font-bold text-blue-900 mb-4">Marco de Referencia: Ciclo ISO 50001</h2>
+                    <p class="text-lg text-gray-600 mb-12">Adoptamos el ciclo de mejora continua (PDCA) de la norma ISO 50001 como la columna vertebral de una gestión energética robusta. Haga clic en cada fase para explorar los detalles.</p>
+                </div>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+                    <div id="pdca-diagram" class="grid grid-cols-2 gap-4 w-full max-w-md">
+                        <div class="pdca-step bg-blue-100 p-6 rounded-lg text-center cursor-pointer" data-step="plan">
+                            <i class="fas fa-clipboard-list text-4xl text-blue-800 mb-2"></i>
+                            <h3 class="text-2xl font-bold">Planificar</h3>
+                        </div>
+                        <div class="pdca-step bg-green-100 p-6 rounded-lg text-center cursor-pointer" data-step="do">
+                            <i class="fas fa-cogs text-4xl text-green-800 mb-2"></i>
+                            <h3 class="text-2xl font-bold">Hacer</h3>
+                        </div>
+                        <div class="pdca-step bg-orange-100 p-6 rounded-lg text-center cursor-pointer" data-step="act">
+                            <i class="fas fa-bullseye text-4xl text-orange-800 mb-2"></i>
+                            <h3 class="text-2xl font-bold">Actuar</h3>
+                        </div>
+                        <div class="pdca-step bg-purple-100 p-6 rounded-lg text-center cursor-pointer" data-step="check">
+                            <i class="fas fa-tasks text-4xl text-purple-800 mb-2"></i>
+                            <h3 class="text-2xl font-bold">Verificar</h3>
+                        </div>
+                    </div>
+                    <div id="pdca-content" class="w-full md:w-1/2 mt-8 md:mt-0 bg-white p-8 rounded-lg shadow-md">
+                        <h3 id="pdca-title" class="text-2xl font-bold text-blue-900 mb-4">Seleccione una fase</h3>
+                        <div id="pdca-text" class="text-gray-700"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="oportunidades" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto">
+                    <h2 class="text-4xl font-bold text-blue-900 mb-4">Áreas de Oportunidad</h2>
+                    <p class="text-lg text-gray-600 mb-12">Explore las oportunidades de ahorro en los sistemas clave de su planta. Seleccione un área para ver las acciones específicas y priorice sus esfuerzos con el gráfico de impacto vs. inversión.</p>
+                </div>
+
+                <div class="flex flex-col lg:flex-row gap-12">
+                    <div class="w-full lg:w-3/5">
+                        <h3 class="text-2xl font-semibold mb-6 text-center">Seleccione un Sistema para Analizar</h3>
+                        <div id="opportunity-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-2/5">
+                        <h3 class="text-2xl font-semibold mb-6 text-center">Priorización de Oportunidades</h3>
+                         <div class="chart-container">
+                            <canvas id="opportunityChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="opportunity-details" class="mt-16 bg-gray-50 p-8 rounded-lg shadow-inner min-h-[300px]">
+                     <p class="text-center text-gray-500">Seleccione un área para ver los detalles de las oportunidades de mejora.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="estrategia" class="py-20">
+            <div class="container mx-auto px-6">
+                 <div class="text-center max-w-3xl mx-auto">
+                    <h2 class="text-4xl font-bold text-blue-900 mb-4">Gestión y Estrategia a Largo Plazo</h2>
+                    <p class="text-lg text-gray-600 mb-12">La tecnología es importante, pero el éxito a largo plazo depende de un marco de gestión sólido, un mantenimiento proactivo y una cultura de eficiencia.</p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <div class="border-b border-gray-200 mb-6">
+                        <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                            <button class="tab active whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg" data-tab="economia">
+                                Consideraciones Económicas
+                            </button>
+                            <button class="tab whitespace-nowrap py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium text-lg" data-tab="mantenimiento">
+                                Mantenimiento y Confiabilidad
+                            </button>
+                             <button class="tab whitespace-nowrap py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium text-lg" data-tab="gestion">
+                                Gestión y Contratos
+                            </button>
+                             <button class="tab whitespace-nowrap py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium text-lg" data-tab="formacion">
+                                Formación y Cultura
+                            </button>
+                        </nav>
+                    </div>
+
+                    <div id="tab-content">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="conclusion" class="py-20 bg-blue-900 text-white">
+             <div class="container mx-auto px-6 text-center">
+                 <img src="https://www.inteligenciaenergetica.com.ar/inteligencia_energetica/img/LOGOIEWEB_blanco.png" alt="Logo Inteligencia Energética" class="h-16 mx-auto mb-6">
+                 <h2 class="text-3xl font-bold mb-4">Conclusión y Próximos Pasos</h2>
+                 <p class="max-w-4xl mx-auto mb-8 text-gray-200">La optimización del uso de la energía es un viaje continuo que requiere un enfoque integral. Desde <span class="font-bold">Inteligencia Energética (IE)</span>, estamos a su disposición para colaborar en cada fase de este proceso, desde diagnósticos y estudios de viabilidad hasta la implementación de soluciones llave en mano, asegurando un seguimiento riguroso de los resultados.</p>
+                 <a href="https://www.inteligenciaenergetica.com.ar/" target="_blank" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full text-lg transition-transform transform hover:scale-105">
+                     Contactar a un Experto
+                 </a>
+             </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-6 text-center text-sm">
+            <p>&copy; 2024 Guía de Gestión de Eficiencia Energética. Desarrollado como herramienta interactiva.</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        const data = {
+            pdcaContent: {
+                plan: {
+                    title: "1. Planificación (Plan)",
+                    text: `<ul class="list-disc ml-6 space-y-2">
+                            <li>Establecer una línea base energética detallada.</li>
+                            <li>Identificar los Usos Significativos de la Energía (USEs).</li>
+                            <li>Definir Indicadores de Desempeño Energético (EnPls / KPIs) relevantes (ej: kWh/tonelada producida).</li>
+                            <li>Fijar objetivos y metas de mejora claros y medibles.</li>
+                        </ul>`
+                },
+                do: {
+                    title: "2. Implementación (Do)",
+                    text: `<ul class="list-disc ml-6 space-y-2">
+                            <li>Ejecutar las medidas de mejora identificadas a través de planes de acción.</li>
+                            <li>Asegurar la competencia del personal involucrado mediante formación específica.</li>
+                            <li>Mantener una comunicación efectiva a todos losniveles sobre los objetivos y avances.</li>
+                        </ul>`
+                },
+                check: {
+                    title: "3. Verificación (Check)",
+                    text: `<ul class="list-disc ml-6 space-y-2">
+                            <li>Monitorizar y medir el desempeño energético de forma continua (M&V).</li>
+                            <li>Realizar auditorías energéticas periódicas.</li>
+                            <li>Evaluar el cumplimiento legal y otros requisitos (normativas como ΑΕΑ 90364-8-1, IEC 60364, etc.).</li>
+                        </ul>`
+                },
+                act: {
+                    title: "4. Actuación (Act)",
+                    text: `<ul class="list-disc ml-6 space-y-2">
+                            <li>Revisar los resultados del desempeño y las auditorías.</li>
+                            <li>Ajustar las estrategias y planes de acción basados en los hallazgos.</li>
+                            <li>Identificar nuevas oportunidades y buscar la mejora continua del SGE.</li>
+                        </ul>`
+                }
+            },
+            opportunities: {
+                aireComprimido: {
+                    title: "Aire Comprimido",
+                    icon: "fas fa-compress",
+                    description: "Uno de los servicios más costosos. A menudo oculta grandes potenciales de ahorro con retornos de inversión muy atractivos.",
+                    specifics: [
+                        { title: "Detección y Reparación de Fugas", what: "Establecer un programa continuo y proactivo de detección y reparación.", how: "Utilizar detectores ultrasónicos, realizar barridos periódicos y gestionar reparaciones vía CMMS (SAP PM).", benefit: "Ahorro directo del 10-30% del costo de generación. Medida de bajo costo y retorno muy rápido." },
+                        { title: "Optimización de la Presión", what: "Operar el sistema a la mínima presión necesaria.", how: "Realizar un mapeo de presiones requeridas y ajustar los presostatos o el control centralizado.", benefit: "Ahorro de ~1% por cada 0.1 bar de reducción. Menor pérdida por fugas." },
+                        { title: "Optimización de la Generación", what: "Utilizar compresores VSD para demandas fluctuantes y/o sistemas de control maestro ('sequencer').", how: "Analizar perfil de demanda, evaluar instalación de VSDs e implementar controladores de secuencia.", benefit: "Ahorros del 10-50% en la energía de generación. Presión de red más estable." },
+                    ]
+                },
+                vapor: {
+                    title: "Sistemas de Vapor",
+                    icon: "fas fa-steam",
+                    description: "Sistema vital para procesos térmicos. La eficiencia en la generación, distribución y uso final es clave.",
+                     specifics: [
+                        { title: "Mantenimiento de Purgadores", what: "Implementar un programa sistemático de inspección, prueba y mantenimiento de todos los purgadores.", how: "Realizar inspecciones regulares con ultrasonido y termografía. Reparar o reemplazar purgadores defectuosos inmediatamente.", benefit: "Ahorro de vapor del 5-20%. Mejora de la transferencia de calor. Bajo costo, retorno muy rápido." },
+                        { title: "Aislamiento Térmico Óptimo", what: "Asegurar que todas las superficies calientes (tuberías, válvulas, tanques) estén correctamente aisladas.", how: "Realizar auditoría térmica con termografía. Instalar materiales y espesores adecuados. Usar mantas removibles en válvulas.", benefit: "Reducción drástica de pérdidas de calor (hasta 90%). Ahorro de combustible. Mejora de seguridad." },
+                        { title: "Maximizar Retorno de Condensado", what: "Recuperar la mayor cantidad posible de condensado caliente y retornarlo a la caldera.", how: "Asegurar buen funcionamiento de purgadores, verificar líneas de retorno e instalar bombas de condensado eficientes.", benefit: "Ahorro sustancial de combustible, agua y productos químicos." },
+                    ]
+                },
+                bombeo: {
+                    title: "Sistemas de Bombeo",
+                    icon: "fas fa-water",
+                    description: "Presentes en toda la industria, los sistemas de bombeo ofrecen grandes ahorros mediante control y selección adecuada.",
+                     specifics: [
+                        { title: "Aplicación de Variadores de Velocidad (VSD)", what: "Instalar VSDs en bombas con caudal variable, eliminando el estrangulamiento con válvulas.", how: "Analizar perfiles de flujo y presión. Instalar VSDs controlados por señal de proceso (presión, flujo, nivel).", benefit: "Ahorros muy significativos a cargas parciales (potencia ~ velocidad³). Mejor control del proceso." },
+                        { title: "Selección Eficiente y Mantenimiento", what: "Seleccionar bombas que operen cerca de su Mejor Punto de Eficiencia (BEP).", how: "Utilizar software de selección y análisis de curvas de sistema. Realizar Mantenimiento Basado en Condición (MBC) en impulsores, sellos y rodamientos.", benefit: "Menor consumo eléctrico, mayor fiabilidad y vida útil de la bomba." },
+                    ]
+                },
+                 motores: {
+                    title: "Motores Eléctricos",
+                    icon: "fas fa-robot",
+                    description: "La fuerza motriz de la industria. La eficiencia en motores representa un potencial de ahorro distribuido en toda la planta.",
+                     specifics: [
+                        { title: "Estandarización en Motores de Alta Eficiencia (IE3/IE4)", what: "Adoptar como política el uso de motores de eficiencia Premium (IE3) o Super Premium (IE4) en todos los proyectos y reemplazos.", how: "Especificar motores IE3/IE4 en compras. Priorizar el reemplazo proactivo de motores antiguos (IE1/IE2) de gran potencia o muchas horas de operación.", benefit: "Ahorro del 2-8% por motor. Mayor fiabilidad y vida útil." },
+                        { title: "Correcto Dimensionamiento", what: "Asegurar que los motores estén dimensionados lo más ajustado posible a la carga real.", how: "Medir el consumo real de potencia y el factor de carga. Si un motor opera consistentemente < 60% de su carga, evaluar su reemplazo por uno más pequeño y eficiente.", benefit: "Operación en un rango de mayor eficiencia y mejor factor de potencia." },
+                    ]
+                },
+                 iluminacion: {
+                    title: "Iluminación",
+                    icon: "fas fa-lightbulb",
+                    description: "Una de las oportunidades con más rápido retorno de la inversión, gracias a la tecnología LED y los sistemas de control.",
+                     specifics: [
+                        { title: "Migración a Tecnología LED", what: "Reemplazar sistemáticamente todas las luminarias obsoletas (fluorescentes, halogenuros, etc.) por tecnología LED de alta eficiencia.", how: "Realizar un censo de luminarias. Seleccionar LEDs adecuados que cumplan los niveles de iluminación requeridos.", benefit: "Ahorro drástico (50-80%). Vida útil muy superior, reduciendo el mantenimiento. Retorno muy rápido (< 2 años)." },
+                        { title: "Sistemas de Control Inteligente", what: "Complementar el LED con control para usar la luz solo cuando y donde se necesita.", how: "Instalar sensores de presencia/ocupación. Utilizar fotocélulas para regular la intensidad según la luz natural disponible.", benefit: "Ahorros adicionales del 10-40% sobre el consumo ya reducido por LED." },
+                    ]
+                },
+                 hvac: {
+                    title: "Climatización (HVAC)",
+                    icon: "fas fa-wind",
+                    description: "Clave en edificios y áreas de proceso. La optimización de su operación y mantenimiento es fundamental.",
+                     specifics: [
+                        { title: "Optimización de Operación y Mantenimiento", what: "Asegurar que los sistemas operen eficientemente y solo cuando sea necesario.", how: "Ajustar termostatos a niveles razonables (24°C verano, 21°C invierno), implementar programaciones horarias, limpiar filtros y serpentines, y utilizar 'free cooling' cuando sea posible.", benefit: "Ahorro energético, mejora de la calidad del aire interior y mayor confort." }
+                    ]
+                },
+            },
+            chartData: {
+                labels: ['Aire Comprimido', 'Vapor', 'Iluminación', 'Motores', 'Bombeo', 'HVAC'],
+                potential: [5, 4, 5, 3, 4, 3], // Scale 1-5
+                investment: [5, 3, 4, 3, 3, 4]  // Scale 1-5 where 5 is LOW investment (good)
+            },
+            strategyTabs: {
+                economia: `
+                    <h3 class="text-2xl font-bold text-blue-900 mb-6">Clasificación de Oportunidades por Inversión</h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
+                            <h4 class="font-bold text-xl mb-2">Bajo Costo / Sin Costo (Retorno &lt; 1 año)</h4>
+                            <ul class="list-disc ml-5 space-y-1 text-gray-700">
+                                <li>Reparación de fugas (aire, vapor)</li>
+                                <li>Ajuste de setpoints</li>
+                                <li>Optimización de horarios</li>
+                                <li>Campañas de concienciación</li>
+                            </ul>
+                        </div>
+                        <div class="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-500">
+                            <h4 class="font-bold text-xl mb-2">Mediana Inversión (Retorno 1-3 años)</h4>
+                            <ul class="list-disc ml-5 space-y-1 text-gray-700">
+                                <li>Reemplazo de motores por IE3/IE4</li>
+                                <li>Instalación selectiva de VSDs</li>
+                                <li>Mejora de aislamiento térmico</li>
+                                <li>Actualización masiva a LED</li>
+                                <li>Corrección del factor de potencia</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-500">
+                            <h4 class="font-bold text-xl mb-2">Alta Inversión (Retorno &gt; 3 años)</h4>
+                             <ul class="list-disc ml-5 space-y-1 text-gray-700">
+                                <li>Cambios tecnológicos mayores</li>
+                                <li>Sistemas de recuperación de calor</li>
+                                <li>Implementación de cogeneración</li>
+                                <li>Renovación completa de sistemas centrales</li>
+                                <li>Implementación completa de ISO 50001</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="mt-8 text-gray-600">La viabilidad de cada proyecto debe evaluarse rigurosamente con indicadores como Payback, VAN y TIR.</p>`,
+                mantenimiento: `
+                    <h3 class="text-2xl font-bold text-blue-900 mb-6">Mantenimiento como Eje de la Eficiencia</h3>
+                    <p class="mb-4 text-gray-600">Un equipo que falla o funciona de forma degradada, consume más energía. Es fundamental integrar la eficiencia en las estrategias de mantenimiento.</p>
+                     <ul class="list-disc ml-5 space-y-3 text-gray-700">
+                        <li><strong class="text-gray-800">Mantenimiento Predictivo (PdM/MBC):</strong> Utilizar termografía, análisis de vibraciones y ultrasonido no solo para predecir fallos, sino para detectar ineficiencias energéticas como puntos calientes, fugas, desalineación y rodamientos defectuosos.</li>
+                        <li><strong class="text-gray-800">Mantenimiento Centrado en Confiabilidad (RCM):</strong> Al analizar modos de fallo, considerar explícitamente aquellos con impacto energético y definir tareas proactivas para prevenirlos.</li>
+                        <li><strong class="text-gray-800">Integración con CMMS (SAP PM):</strong> Codificar tareas de eficiencia, registrar hallazgos (fugas reparadas) y analizar tendencias para justificar mejoras y evaluar la efectividad de las estrategias.</li>
+                    </ul>`,
+                gestion: `
+                    <h3 class="text-2xl font-bold text-blue-900 mb-6">Gestión de Contratos y Monitorización</h3>
+                     <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-bold text-xl mb-2">Sistema de Gestión (ISO 50001)</h4>
+                            <p class="text-gray-700">Adoptar un enfoque estructurado y el ciclo PDCA para gestionar la energía de manera sistemática y orientada a la mejora continua, asegurando ahorros sostenidos en el tiempo.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xl mb-2">Monitorización y Verificación (M&V)</h4>
+                            <p class="text-gray-700">Instalar submedidores en los Usos Significativos de Energía (USEs) y utilizar plataformas de software para analizar datos y verificar el impacto real de las medidas de ahorro implementadas.</p>
+                        </div>
+                        <div class="md:col-span-2">
+                             <h4 class="font-bold text-xl mb-2">Gestión Activa de Contratos de Suministro</h4>
+                             <p class="text-gray-700">Tratar los contratos de energía como un pilar estratégico. Analizar tarifas, cláusulas y penalidades en contraste con el perfil de consumo real para identificar oportunidades de renegociación, cambio de proveedor o ajuste de potencia contratada, logrando reducciones directas de costos.</p>
+                        </div>
+                     </div>`,
+                formacion: `
+                    <h3 class="text-2xl font-bold text-blue-900 mb-6">El Factor Humano: Formación y Cultura</h3>
+                    <p class="mb-4 text-gray-600">El éxito de cualquier iniciativa depende del compromiso y la participación activa de las personas.</p>
+                     <ul class="list-disc ml-5 space-y-3 text-gray-700">
+                        <li><strong class="text-gray-800">Capacitación Adaptada:</strong> Desarrollar programas de formación específicos para cada nivel: operarios (buenas prácticas), mantenimiento (tareas de eficiencia), supervisores (KPIs) y gerencia (liderazgo).</li>
+                        <li><strong class="text-gray-800">Comunicación Continua:</strong> Lanzar campañas de comunicación interna para sensibilizar sobre la importancia del ahorro y celebrar los logros obtenidos.</li>
+                        <li><strong class="text-gray-800">Participación Activa:</strong> Implementar sistemas de sugerencias para recoger ideas de mejora desde la base, reconociendo las buenas prácticas individuales y de equipo.</li>
+                    </ul>`
+            }
+        };
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // PDCA Cycle Interaction
+            const pdcaSteps = document.querySelectorAll('.pdca-step');
+            const pdcaTitle = document.getElementById('pdca-title');
+            const pdcaText = document.getElementById('pdca-text');
+
+            pdcaSteps.forEach(step => {
+                step.addEventListener('click', () => {
+                    const stepKey = step.dataset.step;
+                    const content = data.pdcaContent[stepKey];
+                    pdcaTitle.textContent = content.title;
+                    pdcaText.innerHTML = content.text;
+                });
+            });
+            // Initial selection
+            pdcaSteps[0].click();
+
+            // Opportunities Grid and Chart
+            const opportunityGrid = document.getElementById('opportunity-grid');
+            const opportunityDetails = document.getElementById('opportunity-details');
+            
+            Object.keys(data.opportunities).forEach(key => {
+                const opp = data.opportunities[key];
+                const card = document.createElement('div');
+                card.className = 'opportunity-card bg-white p-4 rounded-lg shadow-md cursor-pointer text-center';
+                card.dataset.key = key;
+                card.innerHTML = `<i class="${opp.icon} text-4xl text-blue-800 mb-3"></i><h4 class="font-semibold">${opp.title}</h4>`;
+                opportunityGrid.appendChild(card);
+            });
+
+            opportunityGrid.addEventListener('click', (e) => {
+                const card = e.target.closest('.opportunity-card');
+                if (!card) return;
+                
+                document.querySelectorAll('.opportunity-card').forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+
+                const key = card.dataset.key;
+                const content = data.opportunities[key];
+                
+                let detailsHtml = `<h3 class="text-3xl font-bold text-blue-900 mb-6">${content.title}</h3>`;
+                detailsHtml += `<p class="text-gray-600 mb-8">${content.description}</p>`;
+                
+                content.specifics.forEach(spec => {
+                    detailsHtml += `
+                        <div class="bg-white p-6 rounded-lg shadow-sm mb-4">
+                            <h4 class="font-bold text-xl mb-2 text-orange-600">${spec.title}</h4>
+                            <div class="grid md:grid-cols-3 gap-6 text-left">
+                                <div><strong class="block text-blue-800">Qué Hacer:</strong> ${spec.what}</div>
+                                <div><strong class="block text-blue-800">Cómo Hacerlo:</strong> ${spec.how}</div>
+                                <div><strong class="block text-blue-800">Beneficio Esperado:</strong> ${spec.benefit}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                opportunityDetails.innerHTML = detailsHtml;
+                opportunityDetails.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+
+            const ctx = document.getElementById('opportunityChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: data.chartData.labels,
+                    datasets: [{
+                        label: 'Potencial de Ahorro',
+                        data: data.chartData.potential,
+                        backgroundColor: 'rgba(30, 58, 138, 0.2)',
+                        borderColor: 'rgba(30, 58, 138, 1)',
+                        borderWidth: 2
+                    }, {
+                        label: 'Bajo Nivel de Inversión',
+                        data: data.chartData.investment,
+                        backgroundColor: 'rgba(249, 115, 22, 0.2)',
+                        borderColor: 'rgba(249, 115, 22, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { display: false },
+                            suggestedMin: 0,
+                            suggestedMax: 5,
+                             pointLabels: {
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += context.raw;
+                                    return label + ' (de 5)';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Strategy Tabs
+            const tabs = document.querySelectorAll('.tab');
+            const tabContent = document.getElementById('tab-content');
+
+            function updateTabContent(tabKey) {
+                tabContent.innerHTML = data.strategyTabs[tabKey];
+                 tabs.forEach(t => {
+                    if (t.dataset.tab === tabKey) {
+                        t.classList.add('active');
+                    } else {
+                        t.classList.remove('active');
+                    }
+                });
+            }
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    updateTabContent(tab.dataset.tab);
+                });
+            });
+            updateTabContent('economia');
+
+        });
+    </script>
+    
+</body>
+</html>
+
